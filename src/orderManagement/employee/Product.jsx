@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 export default function Product() {
 
     const local = 'http://localhost:10000'
-    const api = 'https://gstar-backend2-0.onrender.com'
+    const api = 'https://tool-b.onrender.com'
     const [loading, setLoading] = useState(false);
     const [msg, setMsg] = useState('Please Wait');
     const [profile, setProfile] = useState({})
@@ -38,7 +38,7 @@ export default function Product() {
 
     const [savedData, setSaveddata] = useState([])
     async function alreadysaved(account) {
-        let res = await fetch(`${local}/inv/alreadysavedproduct`, {
+        let res = await fetch(`${api}/inv/alreadysavedproduct`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ account: account })
@@ -85,7 +85,7 @@ export default function Product() {
             let sheetdetails = { token, sheetname, sheeturl, range, clientId, clientSecret, account }
 
             setLoading(true)
-            let res = await fetch(`${local}/api/google/sheet`, {
+            let res = await fetch(`${api}/api/google/sheet`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -122,7 +122,7 @@ export default function Product() {
 
     async function savedata() {
         setLoading(true)
-        let res = await fetch(`${local}/om/data/savenewdata`, {
+        let res = await fetch(`${api}/om/data/savenewdata`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ data: result, name: profile.name })
@@ -149,7 +149,7 @@ export default function Product() {
 
     async function deleteInventory(vendor) {
         let account = profile.account
-        let res = await fetch(`${local}/inv/deleteinventory`, {
+        let res = await fetch(`${api}/inv/deleteinventory`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ vendor, account })
@@ -163,7 +163,7 @@ export default function Product() {
     }
 
     async function deletesynced() {
-        let res = await fetch(`${local}/inv/deletesynced`, {
+        let res = await fetch(`${api}/inv/deletesynced`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ account: profile.account })

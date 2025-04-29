@@ -7,7 +7,7 @@ export default function InvCard({ state }) {
 
     
     const local = 'http://localhost:10000'
-    const api = 'https://gstar-backend2-0.onrender.com'
+    const api = 'https://tool-b.onrender.com'
     const [cards, setCards] = useState([])
 
     useEffect(() => {
@@ -15,7 +15,7 @@ export default function InvCard({ state }) {
     }, [])
 
     async function getinventorycard(account) {
-        let res = await fetch(`${local}/inv/getinventorycard`,{
+        let res = await fetch(`${api}/inv/getinventorycard`,{
             method:'POST',
             headers:{'Content-Type':'application/json'},
             body:JSON.stringify({account})

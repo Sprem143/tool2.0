@@ -8,7 +8,7 @@ import '../../App.scss'
 export default function Urllist({ state }) {
 
     const local = 'http://localhost:10000'
-    const api = 'https://gstar-backend2-0.onrender.com'
+    const api = 'https://tool-b.onrender.com'
     const [loading, setLoading] = useState(false);
     const [msg, setMsg] = useState('Please Wait');
     const [id, setId] = useState('')
@@ -38,7 +38,7 @@ export default function Urllist({ state }) {
 
     async function deleteurl(url) {
         if(account){
-      let res= await fetch(`${local}/scrap/belk/deleteurl`,{
+      let res= await fetch(`${api}/scrap/belk/deleteurl`,{
         method:'POST',
         headers:{'Content-Type':'application/json'},
         body:JSON.stringify({account,url})

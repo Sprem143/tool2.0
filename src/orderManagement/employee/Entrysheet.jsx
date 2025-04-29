@@ -10,7 +10,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 export default function Entrysheet({ state }) {
 
     const local = 'http://localhost:10000'
-    const api = 'https://gstar-backend2-0.onrender.com'
+    const api = 'https://tool-b.onrender.com'
     const [loading, setLoading] = useState(false);
     const [msg, setMsg] = useState('Please Wait');
     const [profile, setProfile] = useState({})
@@ -29,7 +29,7 @@ export default function Entrysheet({ state }) {
     const [selectedSheet, setSelectedsheet] = useState('Select')
     const [predata, setPrevdata] = useState([])
     async function getsavedentry() {
-        let res = await fetch(`${local}/om/data/getsavedentry`, {
+        let res = await fetch(`${api}/om/data/getsavedentry`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ account: state.account })
@@ -62,7 +62,7 @@ export default function Entrysheet({ state }) {
                 let prevDate = await getsavedentry()
                 setLoading(true)
                 console.log(sheetdetails.token)
-                let res = await fetch(`${local}/api/google/sheet`, {
+                let res = await fetch(`${api}/api/google/sheet`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -101,7 +101,7 @@ export default function Entrysheet({ state }) {
                 let prevDate = await getsavedentry()
                 console.log(sheetdetails)
                 setLoading(true)
-                let res = await fetch(`${local}/api/google/sheet`, {
+                let res = await fetch(`${api}/api/google/sheet`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -147,7 +147,7 @@ export default function Entrysheet({ state }) {
 
     async function savedata() {
         setLoading(true)
-        let res = await fetch(`${local}/om/data/savenewdata`, {
+        let res = await fetch(`${api}/om/data/savenewdata`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ data: result, name: profile.name })

@@ -9,7 +9,7 @@ import { TypeAnimation } from 'react-type-animation';
 const E_login = () => {
     const navigate = useNavigate()
     const local = 'http://localhost:10000'
-    const api = 'https://gstar-backend2-0.onrender.com'
+    const api = 'https://tool-b.onrender.com'
 
     const [loading, setLoading] = useState(false);
     const [msg, setMsg] = useState('Please Wait....');
@@ -27,7 +27,7 @@ const E_login = () => {
             setError('Please fill in both fields.');
             return;
         }
-        let res = await fetch(`${local}/auth/login`, {
+        let res = await fetch(`${api}/auth/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password, loginType })

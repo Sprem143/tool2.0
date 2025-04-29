@@ -21,7 +21,7 @@ export default function CheckProduct() {
     const [msg, setMsg] = useState('Please Wait...')
 
     async function checklogin(token) {
-        let res = await fetch(`${local}/om/employee/getprofile`, {
+        let res = await fetch(`${api}/om/employee/getprofile`, {
             method: 'GET',
             headers: { 'Authorization': `Bearer ${token}` }
         })
@@ -95,7 +95,7 @@ export default function CheckProduct() {
     };
 
     const local = 'http://localhost:10000'
-    const api = 'https://gstar-backend2-0.onrender.com'
+    const api = 'https://tool-b.onrender.com'
 
 
     const setcurrentpage = async (n) => {
@@ -106,7 +106,7 @@ export default function CheckProduct() {
 
     const getdata = async (account) => {
         setLoading(true);
-        let res = await fetch(`${local}/brand/getfiltersheetforcheck`, {
+        let res = await fetch(`${api}/brand/getfiltersheetforcheck`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ account: account })
@@ -132,7 +132,7 @@ export default function CheckProduct() {
     const deleteproduct = async (id) => {
         let ans = confirm('Are you sure, You want to delete?')
         if (ans) {
-            let res = await fetch(`${local}/brand/deleteproduct`, {
+            let res = await fetch(`${api}/brand/deleteproduct`, {
                 method: 'DELETE',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ id })
@@ -148,7 +148,7 @@ export default function CheckProduct() {
     }
 
     const editsku = async () => {
-        let res = await fetch(`${local}/brand/editsku`, {
+        let res = await fetch(`${api}/brand/editsku`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ id: edititem._id, newsku: newSku })
@@ -229,7 +229,7 @@ export default function CheckProduct() {
     const handleOutsideClick = async (event) => {
         if (inputRef.current && !inputRef.current.contains(event.target)) {
             if (value) {
-                let res = await fetch(`${local}/brand/editshippingcost`, {
+                let res = await fetch(`${api}/brand/editshippingcost`, {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ id, value })
@@ -267,7 +267,7 @@ export default function CheckProduct() {
         console.log(idarr)
     };
     const deletemanyproduct = async () => {
-        let res = await fetch(`${local}/brand/deletemanyproduct`, {
+        let res = await fetch(`${api}/brand/deletemanyproduct`, {
             method: 'DELETE',
             body: JSON.stringify({ arr: idarr, account: profile.account }),
             headers: { 'Content-Type': 'application/json' }
@@ -286,7 +286,7 @@ export default function CheckProduct() {
     // ----------set shipping  cost in bulk------------
     const [shippingcost, setshippingcost] = useState('')
     const setbulkshippingcost = async () => {
-        let res = await fetch(`${local}/brand/setbulkshippingcost`, {
+        let res = await fetch(`${api}/brand/setbulkshippingcost`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ idarr, shippingcost, account: profile.account })

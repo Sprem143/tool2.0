@@ -17,7 +17,7 @@ import { DateRangePicker } from 'react-date-range';
 export default function Datewise({ state }) {
 
     const local = 'http://localhost:10000'
-    const api = 'https://gstar-backend2-0.onrender.com'
+    const api = 'https://tool-b.onrender.com'
     const [loading, setLoading] = useState(false);
     const [msg, setMsg] = useState('Please Wait');
     const [file, setFile] = useState(null);
@@ -59,7 +59,7 @@ export default function Datewise({ state }) {
 
     async function datewise() {
         setLoading(true)
-        let res = await fetch(`${local}/om/data/datewise`, {
+        let res = await fetch(`${api}/om/data/datewise`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -93,7 +93,7 @@ export default function Datewise({ state }) {
         formData.append("pdf", file);
         formData.append("id", id);
         formData.append("uploadedby", state.name)
-        let res = await fetch(`${local}/upload/updatepdflink`, {
+        let res = await fetch(`${api}/upload/updatepdflink`, {
             method: "POST",
             body: formData,
             headers: {

@@ -8,7 +8,7 @@ import '../../App.scss'
 export default function Search({ sk }) {
 
     const local = 'http://localhost:10000'
-    const api = 'https://gstar-backend2-0.onrender.com'
+    const api = 'https://tool-b.onrender.com'
     const [loading, setLoading] = useState(false);
     const [msg, setMsg] = useState('Please Wait');
 
@@ -22,7 +22,7 @@ export default function Search({ sk }) {
         if (sk.key && sk.searchby) {
             key = key.trim()
             searchby = searchby.trim()
-            let res = await fetch(`${local}/om/data/search`, {
+            let res = await fetch(`${api}/om/data/search`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ key, searchby })

@@ -10,7 +10,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 export default function Return({ state }) {
 
     const local = 'http://localhost:10000'
-    const api = 'https://gstar-backend2-0.onrender.com'
+    const api = 'https://tool-b.onrender.com'
     const [loading, setLoading] = useState(false);
     const [msg, setMsg] = useState('Please Wait');
     const [id, setId] = useState('')
@@ -29,7 +29,7 @@ export default function Return({ state }) {
     };
     async function returned(account) {
         setLoading(true)
-        let res = await fetch(`${local}/om/data/returned`, {
+        let res = await fetch(`${api}/om/data/returned`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ account })
@@ -51,7 +51,7 @@ export default function Return({ state }) {
             alert('Order id require')
             return;
         }
-        let res = await fetch(`${local}/om/data/changestatus`, {
+        let res = await fetch(`${api}/om/data/changestatus`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ id, status })

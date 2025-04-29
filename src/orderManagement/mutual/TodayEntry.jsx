@@ -10,7 +10,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 export default function TodayEntry({ state }) {
 
     const local = 'http://localhost:10000'
-    const api = 'https://gstar-backend2-0.onrender.com'
+    const api = 'https://tool-b.onrender.com'
     const [loading, setLoading] = useState(false);
     const [msg, setMsg] = useState('Please Wait');
     useEffect(() => {
@@ -28,7 +28,7 @@ export default function TodayEntry({ state }) {
     };
     async function todayentry(account) {
         setLoading(true)
-        let res = await fetch(`${local}/om/data/todayentry`, {
+        let res = await fetch(`${api}/om/data/todayentry`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ account })

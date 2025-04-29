@@ -10,7 +10,7 @@ import O_login from "./orderManagement/employee/O_login";
 export default function App() {
     const {setUser} = useUser()
     const local = 'http://localhost:10000'
-    const api = 'https://gstar-backend2-0.onrender.com'
+    const api = 'https://tool-b.onrender.com'
     const navigate = useNavigate()
   const [page, setPage]= useState('')
  useEffect(()=>{
@@ -20,7 +20,7 @@ export default function App() {
  },[])
   async function checklogin(token) {
     console.log('functon')
-    let res = await fetch(`${local}/om/employee/getprofile`, {
+    let res = await fetch(`${api}/om/employee/getprofile`, {
         method: 'GET',
         headers: { 'Authorization': `Bearer ${token}` }
     })

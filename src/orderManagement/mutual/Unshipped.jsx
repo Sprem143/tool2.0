@@ -12,7 +12,7 @@ import { button } from "motion/react-client";
 export default function Unshipped({ state }) {
 
     const local = 'http://localhost:10000'
-    const api = 'https://gstar-backend2-0.onrender.com'
+    const api = 'https://tool-b.onrender.com'
     const [loading, setLoading] = useState(false);
     const [msg, setMsg] = useState('Please Wait');
     const [file, setFile] = useState(null);
@@ -41,7 +41,7 @@ export default function Unshipped({ state }) {
     };
     async function unshipped(account) {
         setLoading(true)
-        let res = await fetch(`${local}/om/data/unshipped`, {
+        let res = await fetch(`${api}/om/data/unshipped`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ account })
@@ -63,7 +63,7 @@ export default function Unshipped({ state }) {
             alert('Order id require')
             return;
         }
-        let res = await fetch(`${local}/om/data/changestatus`, {
+        let res = await fetch(`${api}/om/data/changestatus`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ id, status })
@@ -91,7 +91,7 @@ export default function Unshipped({ state }) {
         formData.append("pdf", file);
         formData.append("id", id);
         formData.append("uploadedby", state.name)
-        let res = await fetch(`${local}/ulpoad/updatepdflink`, {
+        let res = await fetch(`${api}/ulpoad/updatepdflink`, {
             method: "POST",
             body: formData,
             headers: {

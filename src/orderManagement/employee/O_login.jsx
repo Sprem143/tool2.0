@@ -10,7 +10,7 @@ const O_login = () => {
     const navigate = useNavigate()
     const {setUser}= useUser()
     const local = 'http://localhost:10000'
-    const api = 'https://gstar-backend2-0.onrender.com'
+    const api = 'https://tool-b.onrender.com'
 
     const [loading, setLoading] = useState(false);
     const [msg, setMsg] = useState('Please Wait....');
@@ -30,7 +30,7 @@ const O_login = () => {
         setValidated(true);
         if (loginType == 'admin') {
             try {
-                let result = await fetch(`${local}/om/admin/login`, {
+                let result = await fetch(`${api}/om/admin/login`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email: email, password: password, loginType: loginType  })
@@ -45,7 +45,7 @@ const O_login = () => {
             }
         } else if (loginType == 'employee') {
             try {
-                let result = await fetch(`${local}/om/employee/login`, {
+                let result = await fetch(`${api}/om/employee/login`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email, password, loginType })

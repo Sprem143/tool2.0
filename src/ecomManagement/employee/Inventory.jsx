@@ -19,7 +19,7 @@ import ClockLoader from "react-spinners/ClockLoader";
 export default function Inventory() {
 
     const local = 'http://localhost:10000'
-    const api = 'https://gstar-backend2-0.onrender.com'
+    const api = 'https://tool-b.onrender.com'
 
     const navigate = useNavigate()
     const location = useLocation();
@@ -59,7 +59,7 @@ export default function Inventory() {
         console.log(account)
         if (account) {
             setLoading(true)
-            let res = await fetch(`${local}/inv/getproductlink`, {
+            let res = await fetch(`${api}/inv/getproductlink`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -82,7 +82,7 @@ export default function Inventory() {
     // ------download synced product shee-----------
     async function downloadSyncedProduct() {
         try {
-            const response = await fetch(`${local}/inv/downloadSyncedProduct`, {
+            const response = await fetch(`${api}/inv/downloadSyncedProduct`, {
                 method: "GET",
             });
             const blob = await response.blob();
@@ -101,7 +101,7 @@ export default function Inventory() {
 
     const downloadBackup = async () => {
         try {
-            const response = await fetch(`${local}/inv/downloadBackup`, {
+            const response = await fetch(`${api}/inv/downloadBackup`, {
                 method: "GET",
             });
             const blob = await response.blob();

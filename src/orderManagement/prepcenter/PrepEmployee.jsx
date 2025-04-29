@@ -19,7 +19,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 
 export default function PrepEmployee() {
     const local = 'http://localhost:10000'
-    const api = 'https://gstar-backend2-0.onrender.com'
+    const api = 'https://tool-b.onrender.com'
     const navigate = useNavigate();
     const [profile, setProfile] = useState({})
     const [islogin, setIslogin] = useState(false)
@@ -45,7 +45,7 @@ export default function PrepEmployee() {
     const [cards, setCards] = useState([])
     //  get card details -------
     async function getcarddetails(account) {
-        let res = await fetch(`${local}/om/data/getprepcentercard`, {
+        let res = await fetch(`${api}/om/data/getprepcentercard`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ account: account })
@@ -59,7 +59,7 @@ export default function PrepEmployee() {
 
 
     async function getprofile(token) {
-        let res = await fetch(`${local}/om/employee/getprofile`, {
+        let res = await fetch(`${api}/om/employee/getprofile`, {
             method: 'GET',
             headers: { 'Authorization': `Bearer ${token}` }
         })

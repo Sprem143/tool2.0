@@ -12,7 +12,7 @@ import { button } from "motion/react-client";
 export default function Deadline({ state }) {
 
     const local = 'http://localhost:10000'
-    const api = 'https://gstar-backend2-0.onrender.com'
+    const api = 'https://tool-b.onrender.com'
     const [loading, setLoading] = useState(false);
     const [msg, setMsg] = useState('Please Wait');
     const [file, setFile] = useState(null);
@@ -41,7 +41,7 @@ export default function Deadline({ state }) {
     };
     async function deadline(account) {
         setLoading(true)
-        let res = await fetch(`${local}/om/data/deadline`, {
+        let res = await fetch(`${api}/om/data/deadline`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ account })
@@ -71,7 +71,7 @@ export default function Deadline({ state }) {
         formData.append("pdf", file);
         formData.append("id", id);
         formData.append("uploadedby", state.name)
-        let res = await fetch(`${local}/upload/updatepdflink`, {
+        let res = await fetch(`${api}/upload/updatepdflink`, {
             method: "POST",
             body: formData,
             headers: {
