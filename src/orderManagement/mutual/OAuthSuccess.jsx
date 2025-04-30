@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 export default function OAuthSuccess() {
   const navigate = useNavigate();
   const local = 'http://localhost:10000'
-    const api = 'https://tool-b.onrender.com'
+    const api = 'https://brand-b-1.onrender.com'
   useEffect(() => {
     const url = new URL(window.location.href);
     const tokensParam = url.searchParams.get("tokens");

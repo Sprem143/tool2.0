@@ -17,7 +17,7 @@ export default function Threads({ state }) {
 
 
     const local = 'http://localhost:10000'
-    const api = 'https://tool-b.onrender.com'
+    const api = 'https://brand-b-1.onrender.com'
 
     const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
     const [account, setAccount] = useState('')

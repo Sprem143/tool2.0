@@ -7,7 +7,7 @@ export default function InvCard({ state }) {
 
     
     const local = 'http://localhost:10000'
-    const api = 'https://tool-b.onrender.com'
+    const api = 'https://brand-b-1.onrender.com'
     const [cards, setCards] = useState([])
 
     useEffect(() => {

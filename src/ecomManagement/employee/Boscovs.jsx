@@ -21,7 +21,7 @@ import Modal from 'react-bootstrap/Modal';
 export default function Boscovs() {
 
     const local = 'http://localhost:10000'
-    const api = 'https://tool-b.onrender.com'
+    const api = 'https://brand-b-1.onrender.com'
 
     const navigate = useNavigate()
     const [profile, setProfile] = useState(null);

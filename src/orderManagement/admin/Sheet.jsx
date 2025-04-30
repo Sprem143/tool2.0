@@ -5,7 +5,7 @@ function Sheet() {
   const [data, setData] = useState([]);
   const[token, setToken]=useState({})
   const local = 'http://localhost:10000'
-    const api = 'https://tool-b.onrender.com'
+    const api = 'https://brand-b-1.onrender.com'
   const fetchSheet = async () => {
     try {
       let res = await fetch(`${api}/api/google/sheet`, {
