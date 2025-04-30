@@ -384,7 +384,7 @@ export default function Employee2() {
                 <div className="container-fluid p-2 searchboxcontanier">
                     <div className="row">
                         <div className="col-md-7 d-flex align-items-center col-sm-12">
-                            <ul className=' fs-5 links d-flex justify-content-evenly m-0 p-0' style={{ listStyle: 'none' }}>
+                            <ul className=' fs-6 links d-flex justify-content-evenly m-0 p-0' style={{ listStyle: 'none' }}>
                                 <li><button className='nobtn' onClick={showuntrack}><a href="#untrackable" className='text-white'>Untrackable</a></button></li>
                                 <li><button className='nobtn text-white' onClick={pdfrequire}><a href="#pdfrequire" className='text-white'>PDF Require</a></button></li>
                                 <li><button className='nobtn text-white' onClick={unshipped}><a href="#unshipped" className='text-white'>Unshipped</a></button></li>
@@ -444,9 +444,9 @@ export default function Employee2() {
                                         <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 8m7-8a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 4.293V.5A.5.5 0 0 1 8 0m-.5 11.707-1.146 1.147a.5.5 0 0 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 11.707V15.5a.5.5 0 0 1-1 0z" />
                                     </svg>
                                     Hide</span> :
-                                    <div className='d-flex justify-content-center align-items-center'><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" className="me-2 bi bi-patch-plus-fill" viewBox="0 0 16 16">
+                                    <div className='d-flex justify-content-center align-items-center'><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="me-2 bi bi-patch-plus-fill" viewBox="0 0 16 16">
                                         <path d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01zM8.5 6v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 1 0" />
-                                    </svg> <span className="linktext">Add New Order</span>
+                                    </svg> <span className="linktext">Add Order</span>
                                     </div>}
                             </Button>
                         </div>
@@ -456,7 +456,7 @@ export default function Employee2() {
                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="me-2 bi bi-table" viewBox="0 0 16 16">
                                         <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm15 2h-4v3h4zm0 4h-4v3h4zm0 4h-4v3h3a1 1 0 0 0 1-1zm-5 3v-3H6v3zm-5 0v-3H1v2a1 1 0 0 0 1 1zm-4-4h4V8H1zm0-4h4V4H1zm5-3v3h4V4zm4 4H6v3h4z" />
                                     </svg>
-                                    <span className="linktext">New Entry Sheet</span>
+                                    <span className="linktext">Entry Sheet</span>
                                 </div>
                             </Button>
                         </div>
@@ -509,7 +509,7 @@ export default function Employee2() {
                                         <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2z" />
                                         <path d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8m0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-1-5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0M4 8a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0m0 2.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0" />
                                     </svg>
-                                    <Link to='#'> <span className="linktext">Inventory Sheet</span></Link>
+                                    <Link to='#'> <span className="linktext">Inventory</span></Link>
                                 </motion.div>
                             </Button>
                         </div>

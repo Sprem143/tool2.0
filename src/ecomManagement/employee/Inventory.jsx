@@ -83,7 +83,9 @@ export default function Inventory() {
     async function downloadSyncedProduct() {
         try {
             const response = await fetch(`${api}/inv/downloadSyncedProduct`, {
-                method: "GET",
+                method: "POST",
+                body: JSON.stringify({ account: profile.account }),
+                headers: { 'Content-Type': 'application/json' }
             });
             const blob = await response.blob();
             const url = window.URL.createObjectURL(blob);
@@ -117,7 +119,10 @@ export default function Inventory() {
             console.error("Download failed", err);
         }
     }
-
+    const [refresh, setRefresh]= useState(false)
+        function refreshcard(){
+            setRefresh(!refresh)
+        }
     return (
         <>
             {loading && (
@@ -138,7 +143,7 @@ export default function Inventory() {
                         <div className="col-md-7 d-flex align-items-center col-sm-12">
                             <ul className=' fs-5 links d-flex justify-content-evenly align-items-center m-0 p-0' style={{ listStyle: 'none' }}>
                                 <li><Link to='/om/employee'>Home Page</Link></li>
-                                <li><Link to='' className='text-white ms-3'>Inventory Updation</Link></li>
+                                <li><Link to='/google-sheet' className='text-white ms-3'>Upload Data</Link></li>
                                 <li><Link to='' className='text-white ms-3'>Products</Link></li>
                                 <li><Link to='' className='text-white ms-3'>Orders</Link></li>
                                 <li><Link to='' className='text-white ms-3'>Boscovs Scrapping</Link></li>
@@ -178,7 +183,7 @@ export default function Inventory() {
                 {link.length > 0 && <h1 className=' mt-2 mb-2 text-center'>Total Url To Synced - {link.length}</h1>}
                 {profile &&
                     <Suspense fallback={<div>Loading...</div>}>
-                        {profile && <InvCard state={{ account: profile.account }} />}
+                        {profile && <InvCard state={{ account: profile.account }} key={refresh} />}
                     </Suspense>
                 }
 
@@ -215,6 +220,7 @@ export default function Inventory() {
                                 </Dropdown.Menu>
                             </Dropdown>
                             <button className='m-2 themebtn' onClick={() => setShowthread(true)}>Show Thread</button>
+                            <button className='m-2 themebtn' onClick={refreshcard}>Current Status</button>
                         </motion.div> : <h2 className='text-center mt-4'>You have no url to Scrap.Go back to home page and fetch sheet</h2>
                     }
                 </div>

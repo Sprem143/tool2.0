@@ -15,6 +15,7 @@ export default function InvCard({ state }) {
     }, [])
 
     async function getinventorycard(account) {
+        console.log('card refresh')
         let res = await fetch(`${api}/inv/getinventorycard`,{
             method:'POST',
             headers:{'Content-Type':'application/json'},
@@ -42,8 +43,8 @@ export default function InvCard({ state }) {
                             >
                                 <h4 className="text-2xl font-bold mb-2">{card.title}</h4>
                                 <span style={{display:'grid', alignContent:'center'}}>{card.sub}</span>
-                                <div className="d-flex justify-content-evenly align-items-center w-100">
-                                    <img src={card?.img} alt="" width='70' />
+                                <div className="d-flex mt-2 justify-content-evenly align-items-center w-100">
+                                    <img src={card?.img} alt="" width='70' style={{height:'70px'}} />
                                     <h3 className="text-gray-400 fw-bolder">{card.description}</h3>
                                 </div>
                             </motion.div>

@@ -23,9 +23,9 @@ export default function Sheet() {
     const [token, setToken] = useState({})
     const [profile, setProfile] = useState({})
     const navigate = useNavigate()
-        const [selected, setSelected] = useState("Amazon Order id");
-        const [searchkey, setSearchkey] = useState("");
-        const [showSearch, setShowSearch] = useState(false);
+    const [selected, setSelected] = useState("Amazon Order id");
+    const [searchkey, setSearchkey] = useState("");
+    const [showSearch, setShowSearch] = useState(false);
 
     useEffect(() => {
         const url = new URL(window.location.href);
@@ -33,7 +33,7 @@ export default function Sheet() {
         if (tokensParam) {
             localStorage.setItem("google_token", tokensParam);
             setToken(tokensParam)
-        } 
+        }
 
         let user_details = user ? user : JSON.parse(localStorage.getItem('user'))
         setProfile(user_details)
@@ -67,7 +67,7 @@ export default function Sheet() {
     const [data, setData] = useState([])
 
     const [showInventory, setShowInventory] = useState(false)
-    const [showProduct, setShowproduct]= useState(false)
+    const [showProduct, setShowproduct] = useState(false)
 
     const [sheetdetails, setSheetdetail] = useState(null)
 
@@ -81,7 +81,7 @@ export default function Sheet() {
         setShowInventory(true)
     }
 
- 
+
 
     return (
         <>
@@ -98,50 +98,50 @@ export default function Sheet() {
             )}
 
             <div className="container ps-4 pe-4" style={{ opacity: loading ? 0.1 : 1, color: loading ? 'black' : null, zIndex: '10000', width: '100vw', minHeight: '100vh' }}>
-                 <div className="container-fluid p-2 searchboxcontanier">
-                                    <div className="row">
-                                        <div className="col-md-7 d-flex align-items-center col-sm-12">
-                                            <ul className=' fs-5 links d-flex justify-content-evenly m-0 p-0' style={{ listStyle: 'none' }}>
-                                                <Link to='/om/employee'>Home Page</Link>
-                                                <Link to='/ecom/inventory-update'>Sync Product</Link>
-                                                <Link to='/om/employee'>Brand Scrapping</Link>
-                                            </ul>
-                                        </div>
-                                        <div className="col-md-5 col-sm-12">
-                                            <div className="searchbox d-flex justify-content-evenly w-100">
-                                                <Dropdown as={ButtonGroup}>
-                                                    <Button variant="success pt-2 pb-2">{selected}</Button>
-                
-                                                    <Dropdown.Toggle split variant="success" id="dropdown-split-basic" />
-                
-                                                    <Dropdown.Menu>
-                                                        <Dropdown.Item onClick={() => setSelected("ASINs")}>ASINs</Dropdown.Item>
-                                                        <Dropdown.Item onClick={() => setSelected("Vendor ID")}>Vendor ID</Dropdown.Item>
-                                                        <Dropdown.Item onClick={() => setSelected("SKUs to match")}>SKUs to match</Dropdown.Item>
-                                                        <Dropdown.Item onClick={() => setSelected("Vendor Tracking #")}>Vendor Tracking</Dropdown.Item>
-                                                    </Dropdown.Menu>
-                                                </Dropdown>
-                                                <input type="text" value={searchkey} onChange={(e) => setSearchkey(e.target.value)} placeholder='Search in database' />
-                                                <button onClick={search} className='border border-secondary ms-2 p-2'>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="white" className="bi bi-search" viewBox="0 0 16 16">
-                                                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
-                                                    </svg>
-                                                </button>
-                
-                                                <button onClick={cancel} className='border border-secondary ms-2 p-2'>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="white" className="bi bi-x-lg" viewBox="0 0 16 16">
-                                                        <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
-                                                    </svg>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                <div className="container-fluid p-2 searchboxcontanier">
+                    <div className="row">
+                        <div className="col-md-7 d-flex align-items-center col-sm-12">
+                            <ul className=' fs-5 links d-flex justify-content-evenly m-0 p-0' style={{ listStyle: 'none' }}>
+                                <Link to='/om/employee'>Home Page</Link>
+                                <Link to='/ecom/inventory-update'>Sync Product</Link>
+                                <Link to='/om/employee'>Brand Scrapping</Link>
+                            </ul>
+                        </div>
+                        <div className="col-md-5 col-sm-12">
+                            <div className="searchbox d-flex justify-content-evenly w-100">
+                                <Dropdown as={ButtonGroup}>
+                                    <Button variant="success pt-2 pb-2">{selected}</Button>
+
+                                    <Dropdown.Toggle split variant="success" id="dropdown-split-basic" />
+
+                                    <Dropdown.Menu>
+                                        <Dropdown.Item onClick={() => setSelected("ASINs")}>ASINs</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => setSelected("Vendor ID")}>Vendor ID</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => setSelected("SKUs to match")}>SKUs to match</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => setSelected("Vendor Tracking #")}>Vendor Tracking</Dropdown.Item>
+                                    </Dropdown.Menu>
+                                </Dropdown>
+                                <input type="text" value={searchkey} onChange={(e) => setSearchkey(e.target.value)} placeholder='Search in database' />
+                                <button onClick={search} className='border border-secondary ms-2 p-2'>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="white" className="bi bi-search" viewBox="0 0 16 16">
+                                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                                    </svg>
+                                </button>
+
+                                <button onClick={cancel} className='border border-secondary ms-2 p-2'>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="white" className="bi bi-x-lg" viewBox="0 0 16 16">
+                                        <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div className="d-flex justify-content-center align-items-center mb-4" style={{ marginTop: '40px' }}>
                     <motion.button
                         initial={{ opacity: 0, scale: 0 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        whileTap={{ scale: 0.8 }} // Shrinks when clicked
+                        whileTap={{ scale: 0.8 }} 
                         transition={{
                             duration: 2,
                             delay: 0.2,
