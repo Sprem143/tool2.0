@@ -9,7 +9,7 @@ export default function BabyName() {
     const [loading, setLoading] = useState(false);
 
     async function getname() {
-        let res = await fetch(`${api}/name/scrapeNames`, {
+        let res = await fetch(`${local}/name/scrapeNames`, {
             method: 'POST',
             headers: { 'COntent-Type': 'application/json' },
             body: JSON.stringify({ url: 'https://d1rinkb47qrxws.cloudfront.net' })
@@ -20,7 +20,7 @@ export default function BabyName() {
 
     const handleDownload = async () => {
         try {
-          const response = await axios.get(`${api}/name/downloadExcel`, {
+          const response = await axios.get(`${local}/name/downloadExcel`, {
             responseType: 'blob', // Important to specify this for file download
           });
     

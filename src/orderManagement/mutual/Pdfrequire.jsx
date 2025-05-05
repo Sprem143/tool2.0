@@ -41,7 +41,7 @@ export default function Pdfrequire({ state }) {
     };
     async function nopdf(account) {
         setLoading(true)
-        let res = await fetch(`${api}/om/data/pdfrequire`, {
+        let res = await fetch(`${local}/om/data/pdfrequire`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ account })
@@ -71,7 +71,7 @@ export default function Pdfrequire({ state }) {
         formData.append("pdf", file);
         formData.append("id", id);
         formData.append("uploadedby", state.name)
-        let res = await fetch(`${api}/upload/updatepdflink`, {
+        let res = await fetch(`${local}/upload/updatepdflink`, {
             method: "POST",
             body: formData,
             headers: {

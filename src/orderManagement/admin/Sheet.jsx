@@ -8,7 +8,7 @@ function Sheet() {
     const api = 'https://brand-b-1.onrender.com'
   const fetchSheet = async () => {
     try {
-      let res = await fetch(`${api}/api/google/sheet`, {
+      let res = await fetch(`${local}/api/google/sheet`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

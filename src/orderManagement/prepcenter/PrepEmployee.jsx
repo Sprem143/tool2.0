@@ -45,7 +45,7 @@ export default function PrepEmployee() {
     const [cards, setCards] = useState([])
     //  get card details -------
     async function getcarddetails(account) {
-        let res = await fetch(`${api}/om/data/getprepcentercard`, {
+        let res = await fetch(`${local}/om/data/getprepcentercard`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ account: account })
@@ -59,7 +59,7 @@ export default function PrepEmployee() {
 
 
     async function getprofile(token) {
-        let res = await fetch(`${api}/om/employee/getprofile`, {
+        let res = await fetch(`${local}/om/employee/getprofile`, {
             method: 'GET',
             headers: { 'Authorization': `Bearer ${token}` }
         })

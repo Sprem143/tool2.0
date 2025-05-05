@@ -47,7 +47,7 @@ export default function OmAdminSignup() {
         } else {
             setErrors({});
             setLoading(true)
-            let res = await fetch(`${api}/om/admin/signup`, {
+            let res = await fetch(`${local}/om/admin/signup`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ formdata })
@@ -65,7 +65,7 @@ export default function OmAdminSignup() {
         setLoading(true)
 
         if (email) {
-            let res = await fetch(`${api}/om/admin/sendotp`, {
+            let res = await fetch(`${local}/om/admin/sendotp`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email })
@@ -98,7 +98,7 @@ export default function OmAdminSignup() {
         setLoading(true)
         let formData2 = new FormData();
         formData2.append('file', file);
-        let res = await fetch(`${api}/upload/uploadprofilepic`, {
+        let res = await fetch(`${local}/upload/uploadprofilepic`, {
             method: 'POST',
             body: formData2,
             headers: {}

@@ -16,7 +16,7 @@ export default function InvCard({ state }) {
 
     async function getinventorycard(account) {
         console.log('card refresh')
-        let res = await fetch(`${api}/inv/getinventorycard`,{
+        let res = await fetch(`${local}/inv/getinventorycard`,{
             method:'POST',
             headers:{'Content-Type':'application/json'},
             body:JSON.stringify({account})

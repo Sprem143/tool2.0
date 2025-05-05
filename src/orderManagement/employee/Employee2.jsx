@@ -39,7 +39,7 @@ export default function Employee2() {
     }, []);
 
     async function getprofile(token) {
-        let res = await fetch(`${api}/om/employee/getprofile`, {
+        let res = await fetch(`${local}/om/employee/getprofile`, {
             method: 'GET',
             headers: { 'Authorization': `Bearer ${token}` }
         })
@@ -140,7 +140,7 @@ export default function Employee2() {
     const [cards, setCards] = useState([])
     //  get card details -------
     async function getcarddetails(account) {
-        let res = await fetch(`${api}/om/data/getcarddetails`, {
+        let res = await fetch(`${local}/om/data/getcarddetails`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ account: account })
@@ -180,7 +180,7 @@ export default function Employee2() {
 
     const addproduct = async () => {
         try {
-            let res = await fetch(`${api}/om/data/addproduct`, {
+            let res = await fetch(`${local}/om/data/addproduct`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ product: order, id: profile.name, editid: editid })
@@ -262,7 +262,7 @@ export default function Employee2() {
         formData.append("pdf", file);
         formData.append("id", id);
         formData.append("uploadedby", profile.name)
-        let res = await fetch(`${api}/upload/updatepdflink`, {
+        let res = await fetch(`${local}/upload/updatepdflink`, {
             method: "POST",
             body: formData,
             headers: {
@@ -288,7 +288,7 @@ export default function Employee2() {
         setMsg("Uploading pdf.. Wait..")
         const formData = new FormData();
         formData.append("pdf", file);
-        let res = await fetch(`${api}/upload/getpdflink`, {
+        let res = await fetch(`${local}/upload/getpdflink`, {
             method: "POST",
             body: formData,
             headers: {}
@@ -327,7 +327,7 @@ export default function Employee2() {
         const clientid = profile.clientid
         const secretkey = profile.secretkey
         console.log(clientid, secretkey)
-        const response = await fetch(`${api}/api/google/auth`, {
+        const response = await fetch(`${local}/api/google/auth`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -509,7 +509,7 @@ export default function Employee2() {
                                         <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2z" />
                                         <path d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8m0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-1-5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0M4 8a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0m0 2.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0" />
                                     </svg>
-                                    <Link to='#'> <span className="linktext">Inventory</span></Link>
+                                    <Link to='/extract-sku'> <span className="linktext">Extract SKU</span></Link>
                                 </motion.div>
                             </Button>
                         </div>

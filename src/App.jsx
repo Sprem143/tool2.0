@@ -20,7 +20,7 @@ export default function App() {
  },[])
   async function checklogin(token) {
     console.log('functon')
-    let res = await fetch(`${api}/om/employee/getprofile`, {
+    let res = await fetch(`${local}/om/employee/getprofile`, {
         method: 'GET',
         headers: { 'Authorization': `Bearer ${token}` }
     })

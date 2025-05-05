@@ -46,6 +46,7 @@ export default function Inventory() {
 
     useEffect(() => {
         let user = JSON.parse(localStorage.getItem('user'))
+        console.log(user)
         setProfile(user)
         getproductlink(user.account)
     }, [])
@@ -59,7 +60,7 @@ export default function Inventory() {
         console.log(account)
         if (account) {
             setLoading(true)
-            let res = await fetch(`${api}/inv/getproductlink`, {
+            let res = await fetch(`${local}/inv/getproductlink`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -82,14 +83,15 @@ export default function Inventory() {
     // ------download synced product shee-----------
     async function downloadSyncedProduct() {
         try {
-            const response = await fetch(`${api}/inv/downloadSyncedProduct`, {
+            setLoading(true)
+            const response = await fetch(`${local}/inv/downloadSyncedProduct`, {
                 method: "POST",
                 body: JSON.stringify({ account: profile.account }),
                 headers: { 'Content-Type': 'application/json' }
             });
             const blob = await response.blob();
             const url = window.URL.createObjectURL(blob);
-
+            setLoading(false)
             const a = document.createElement("a");
             a.href = url;
             a.download = `${profile.account}-synced-sheet.xlsx`;
@@ -103,7 +105,7 @@ export default function Inventory() {
 
     const downloadBackup = async () => {
         try {
-            const response = await fetch(`${api}/inv/downloadBackup`, {
+            const response = await fetch(`${local}/inv/downloadBackup`, {
                 method: "GET",
             });
             const blob = await response.blob();

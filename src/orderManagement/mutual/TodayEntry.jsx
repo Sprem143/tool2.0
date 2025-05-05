@@ -28,7 +28,7 @@ export default function TodayEntry({ state }) {
     };
     async function todayentry(account) {
         setLoading(true)
-        let res = await fetch(`${api}/om/data/todayentry`, {
+        let res = await fetch(`${local}/om/data/todayentry`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ account })

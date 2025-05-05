@@ -38,7 +38,7 @@ export default function Urllist({ state }) {
 
     async function deleteurl(url) {
         if(account){
-      let res= await fetch(`${api}/scrap/belk/deleteurl`,{
+      let res= await fetch(`${local}/scrap/belk/deleteurl`,{
         method:'POST',
         headers:{'Content-Type':'application/json'},
         body:JSON.stringify({account,url})

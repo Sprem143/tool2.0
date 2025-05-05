@@ -29,7 +29,7 @@ export default function Return({ state }) {
     };
     async function returned(account) {
         setLoading(true)
-        let res = await fetch(`${api}/om/data/returned`, {
+        let res = await fetch(`${local}/om/data/returned`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ account })
@@ -51,7 +51,7 @@ export default function Return({ state }) {
             alert('Order id require')
             return;
         }
-        let res = await fetch(`${api}/om/data/changestatus`, {
+        let res = await fetch(`${local}/om/data/changestatus`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ id, status })

@@ -23,6 +23,9 @@ import Sheet from './orderManagement/mutual/Sheet.jsx';
 import Header from './Header.jsx';
 import Boscovs from './ecomManagement/employee/Boscovs.jsx';
 import BabyName from './BabyName.jsx';
+import Academy from './ecomManagement/employee/Academy.jsx';
+import ExtractSKU from './orderManagement/mutual/ExtractSKU.jsx';
+
 
 createRoot(document.getElementById('root')).render(
    <BrowserRouter>
@@ -43,11 +46,15 @@ createRoot(document.getElementById('root')).render(
             <Route path='/om/date-wise' element={<Datewise />} />
             {/* <Route path='/sheet' element={<Sheet/>}/> */}
             <Route path='/oauth-success' element={<OAuthSuccess />} />
+
             <Route path='/ecom/belk-brand-scrapping' element={<Brandscrapping />} />
             <Route path='/ecom/boscovs-brand-scrapping' element={<Boscovs />} />
+            <Route path='/ecom/academy-brand-scrapping' element={<Academy />} />
+
             <Route path='/ecom/check-product' element={<CheckProduct />} />
             <Route path='/ecom/inventory-update' element={<Inventory />} />
             <Route path='/baby' element={<BabyName />} />
+            <Route path='/extract-sku' element={<ExtractSKU />} />
          </Routes>
       </UserProvider>
    </BrowserRouter>
