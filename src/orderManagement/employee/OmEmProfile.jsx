@@ -53,7 +53,7 @@ export default function OmEmProfile({ state }) {
         formData.append("pdf", file);
         formData.append("id", id);
         formData.append("uploadedby", state.name)
-        let res = await fetch(`${local}/upload/updatepdflink`, {
+        let res = await fetch(`${api}/upload/updatepdflink`, {
             method: "POST",
             body: formData,
             headers: {
@@ -77,7 +77,7 @@ export default function OmEmProfile({ state }) {
         }
         if (secretkey && state.email) {
             setLoading(true)
-            let res = await fetch(`${local}/om/employee/addsecretkey`, {
+            let res = await fetch(`${api}/om/employee/addsecretkey`, {
                 method: 'POSt',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email: state.email, key: secretkey })
@@ -106,7 +106,7 @@ export default function OmEmProfile({ state }) {
         let id = profile._id
         setLoading(true)
         let newsheet = ({ ...sheetdetails, email: profile.email })
-        let res = await fetch(`${local}/om/employee/addsheetdetails`, {
+        let res = await fetch(`${api}/om/employee/addsheetdetails`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ newsheet,id })
@@ -135,7 +135,7 @@ export default function OmEmProfile({ state }) {
             return;
         }
         let id = profile._id
-        let res = await fetch(`${local}/om/employee/addclientid`, {
+        let res = await fetch(`${api}/om/employee/addclientid`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ clientId, id })

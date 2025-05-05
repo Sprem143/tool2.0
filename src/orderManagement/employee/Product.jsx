@@ -38,7 +38,7 @@ export default function Product() {
 
     const [savedData, setSaveddata] = useState([])
     async function alreadysaved(account) {
-        let res = await fetch(`${local}/inv/alreadysavedproduct`, {
+        let res = await fetch(`${api}/inv/alreadysavedproduct`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ account: account })
@@ -83,7 +83,7 @@ export default function Product() {
             let sheetdetails = { token, sheetname, sheeturl, range, clientId, clientSecret, account }
 
             setLoading(true)
-            let res = await fetch(`${local}/api/google/sheet`, {
+            let res = await fetch(`${api}/api/google/sheet`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -120,7 +120,7 @@ export default function Product() {
 
     async function savedata() {
         setLoading(true)
-        let res = await fetch(`${local}/om/data/savenewdata`, {
+        let res = await fetch(`${api}/om/data/savenewdata`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ data: result, name: profile.name })
@@ -147,7 +147,7 @@ export default function Product() {
 
     async function deleteInventory(vendor) {
         let account = profile.account
-        let res = await fetch(`${local}/inv/deleteinventory`, {
+        let res = await fetch(`${api}/inv/deleteinventory`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ vendor, account })
@@ -161,7 +161,7 @@ export default function Product() {
     }
 
     async function deletesynced() {
-        let res = await fetch(`${local}/inv/deletesynced`, {
+        let res = await fetch(`${api}/inv/deletesynced`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ account: profile.account })
@@ -217,7 +217,7 @@ export default function Product() {
         formData.append('file', invfile);
         formData.append('account', profile.account)
         try {
-            const res = await axios.post(`${local}/inv/uploadinvfile`, formData, {
+            const res = await axios.post(`${api}/inv/uploadinvfile`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -236,7 +236,7 @@ export default function Product() {
 
     async function viewinventory(vendor) {
         setLoading(true)
-        let res = await fetch(`${local}/inv/viewinventoryfile`, {
+        let res = await fetch(`${api}/inv/viewinventoryfile`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ account: profile.account, vendor: vendor })
@@ -251,7 +251,7 @@ export default function Product() {
     }
     async function viewsynceddata() {
         setLoading(true)
-        let res = await fetch(`${local}/inv/viewsynceddata`, {
+        let res = await fetch(`${api}/inv/viewsynceddata`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ account: profile.account })
@@ -267,7 +267,7 @@ export default function Product() {
     async function downloadoldsyncedfile() {
         try {
             setLoading(true)
-            const response = await fetch(`${local}/inv/downloadSyncedProduct`, {
+            const response = await fetch(`${api}/inv/downloadSyncedProduct`, {
                 method: "POST",
                 body: JSON.stringify({ account: profile.account }),
                 headers: { 'Content-Type': 'application/json' }

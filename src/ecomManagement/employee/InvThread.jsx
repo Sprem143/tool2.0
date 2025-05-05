@@ -66,7 +66,7 @@ export default function InvThread({ state }) {
     //     while (index < urls.length) {
     //         const startTime = performance.now();
     //         let url = urls[index]
-    //         let res = await fetch(`${local}/inv/thread1`, {
+    //         let res = await fetch(`${api}/inv/thread1`, {
     //             method: 'POST',
     //             headers: { 'Content-Type': 'application/json' },
     //             body: JSON.stringify({ url, account: account, })
@@ -94,7 +94,7 @@ export default function InvThread({ state }) {
     //     while (index < urls.length) {
     //         const startTime = performance.now();
     //         let url = urls[index]
-    //         let res = await fetch(`${local}/inv/thread2`, {
+    //         let res = await fetch(`${api}/inv/thread2`, {
     //             method: 'POST',
     //             headers: { 'Content-Type': 'application/json' },
     //             body: JSON.stringify({ url, account: account })
@@ -123,7 +123,7 @@ export default function InvThread({ state }) {
     //     while (index < urls.length) {
     //         const startTime = performance.now();
     //         let url = urls[index]
-    //         let res = await fetch(`${local}/inv/thread3`, {
+    //         let res = await fetch(`${api}/inv/thread3`, {
     //             method: 'POST',
     //             headers: { 'Content-Type': 'application/json' },
     //             body: JSON.stringify({ url, account: account })
@@ -151,7 +151,7 @@ export default function InvThread({ state }) {
     //     while (index < urls.length) {
     //         const startTime = performance.now();
     //         let url = urls[index]
-    //         let res = await fetch(`${local}/inv/thread4`, {
+    //         let res = await fetch(`${api}/inv/thread4`, {
     //             method: 'POST',
     //             headers: { 'Content-Type': 'application/json' },
     //             body: JSON.stringify({ url, account: account })
@@ -179,7 +179,7 @@ export default function InvThread({ state }) {
     //     while (index < urls.length) {
     //         const startTime = performance.now();
     //         let url = urls[index]
-    //         let res = await fetch(`${local}/inv/thread5`, {
+    //         let res = await fetch(`${api}/inv/thread5`, {
     //             method: 'POST',
     //             headers: { 'Content-Type': 'application/json' },
     //             body: JSON.stringify({ url, account: account })
@@ -207,7 +207,7 @@ export default function InvThread({ state }) {
     //     while (index < urls.length) {
     //         const startTime = performance.now();
     //         let url = urls[index]
-    //         let res = await fetch(`${local}/inv/thread6`, {
+    //         let res = await fetch(`${api}/inv/thread6`, {
     //             method: 'POST',
     //             headers: { 'Content-Type': 'application/json' },
     //             body: JSON.stringify({ url, account: account })
@@ -235,7 +235,7 @@ export default function InvThread({ state }) {
     //     while (index < urls.length) {
     //         const startTime = performance.now();
     //         let url = urls[index]
-    //         let res = await fetch(`${local}/inv/thread7`, {
+    //         let res = await fetch(`${api}/inv/thread7`, {
     //             method: 'POST',
     //             headers: { 'Content-Type': 'application/json' },
     //             body: JSON.stringify({ url, account: account })
@@ -263,7 +263,7 @@ export default function InvThread({ state }) {
     //     while (index < urls.length) {
     //         const startTime = performance.now();
     //         let url = urls[index]
-    //         let res = await fetch(`${local}/inv/thread8`, {
+    //         let res = await fetch(`${api}/inv/thread8`, {
     //             method: 'POST',
     //             headers: { 'Content-Type': 'application/json' },
     //             body: JSON.stringify({ url, account: account })
@@ -291,7 +291,7 @@ export default function InvThread({ state }) {
     //     while (index < urls.length) {
     //         const startTime = performance.now();
     //         let url = urls[index]
-    //         let res = await fetch(`${local}/inv/thread9`, {
+    //         let res = await fetch(`${api}/inv/thread9`, {
     //             method: 'POST',
     //             headers: { 'Content-Type': 'application/json' },
     //             body: JSON.stringify({ url, account: account })
@@ -319,7 +319,7 @@ export default function InvThread({ state }) {
     //     while (index < urls.length) {
     //         const startTime = performance.now();
     //         let url = urls[index]
-    //         let res = await fetch(`${local}/inv/thread10`, {
+    //         let res = await fetch(`${api}/inv/thread10`, {
     //             method: 'POST',
     //             headers: { 'Content-Type': 'application/json' },
     //             body: JSON.stringify({ url, account: account })
@@ -347,7 +347,7 @@ export default function InvThread({ state }) {
     //     while (index < urls.length) {
     //         const startTime = performance.now();
     //         let url = urls[index]
-    //         let res = await fetch(`${local}/inv/thread11`, {
+    //         let res = await fetch(`${api}/inv/thread11`, {
     //             method: 'POST',
     //             headers: { 'Content-Type': 'application/json' },
     //             body: JSON.stringify({ url, account: account })
@@ -374,7 +374,7 @@ export default function InvThread({ state }) {
     //     while (index < urls.length) {
     //         const startTime = performance.now();
     //         let url = urls[index]
-    //         let res = await fetch(`${local}/inv/thread12`, {
+    //         let res = await fetch(`${api}/inv/thread12`, {
     //             method: 'POST',
     //             headers: { 'Content-Type': 'application/json' },
     //             body: JSON.stringify({ url, account: account })
@@ -402,7 +402,7 @@ export default function InvThread({ state }) {
     //     while (index < urls.length) {
     //         const startTime = performance.now();
     //         let url = urls[index]
-    //         let res = await fetch(`${local}/inv/thread13`, {
+    //         let res = await fetch(`${api}/inv/thread13`, {
     //             method: 'POST',
     //             headers: { 'Content-Type': 'application/json' },
     //             body: JSON.stringify({ url, account: account })
@@ -430,7 +430,7 @@ export default function InvThread({ state }) {
     //     while (index < urls.length) {
     //         const startTime = performance.now();
     //         let url = urls[index]
-    //         let res = await fetch(`${local}/inv/thread14`, {
+    //         let res = await fetch(`${api}/inv/thread14`, {
     //             method: 'POST',
     //             headers: { 'Content-Type': 'application/json' },
     //             body: JSON.stringify({ url, account: account })
@@ -457,7 +457,7 @@ export default function InvThread({ state }) {
     //     while (index < urls.length) {
     //         const startTime = performance.now();
     //         let url = urls[index]
-    //         let res = await fetch(`${local}/inv/thread15`, {
+    //         let res = await fetch(`${api}/inv/thread15`, {
     //             method: 'POST',
     //             headers: { 'Content-Type': 'application/json' },
     //             body: JSON.stringify({ url, account: account })
@@ -485,7 +485,7 @@ export default function InvThread({ state }) {
     //     while (index < urls.length) {
     //         const startTime = performance.now();
     //         let url = urls[index]
-    //         let res = await fetch(`${local}/inv/thread16`, {
+    //         let res = await fetch(`${api}/inv/thread16`, {
     //             method: 'POST',
     //             headers: { 'Content-Type': 'application/json' },
     //             body: JSON.stringify({ url, account: account })
@@ -511,7 +511,7 @@ export default function InvThread({ state }) {
     //     while (index < urls.length) {
     //         const startTime = performance.now();
     //         let url = urls[index]
-    //         let res = await fetch(`${local}/inv/thread17`, {
+    //         let res = await fetch(`${api}/inv/thread17`, {
     //             method: 'POST',
     //             headers: { 'Content-Type': 'application/json' },
     //             body: JSON.stringify({ url, account: account })
@@ -536,7 +536,7 @@ export default function InvThread({ state }) {
     //     while (index < urls.length) {
     //         const startTime = performance.now();
     //         let url = urls[index]
-    //         let res = await fetch(`${local}/inv/thread18`, {
+    //         let res = await fetch(`${api}/inv/thread18`, {
     //             method: 'POST',
     //             headers: { 'Content-Type': 'application/json' },
     //             body: JSON.stringify({ url, account: account })
@@ -563,7 +563,7 @@ export default function InvThread({ state }) {
         while (index < urls.length) {
             const startTime = performance.now();
             let url = urls[index]
-            let res = await fetch(`${local}/inv/thread1`, {
+            let res = await fetch(`${api}/inv/thread1`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ url, account: account, })
@@ -595,7 +595,7 @@ export default function InvThread({ state }) {
         while (index < urls.length) {
             const startTime = performance.now();
             let url = urls[index]
-            let res = await fetch(`${local}/inv/thread2`, {
+            let res = await fetch(`${api}/inv/thread2`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ url, account: account })
@@ -628,7 +628,7 @@ export default function InvThread({ state }) {
         while (index < urls.length) {
             const startTime = performance.now();
             let url = urls[index]
-            let res = await fetch(`${local}/inv/thread3`, {
+            let res = await fetch(`${api}/inv/thread3`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ url, account: account })
@@ -660,7 +660,7 @@ export default function InvThread({ state }) {
         while (index < urls.length) {
             const startTime = performance.now();
             let url = urls[index]
-            let res = await fetch(`${local}/inv/thread4`, {
+            let res = await fetch(`${api}/inv/thread4`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ url, account: account })
@@ -692,7 +692,7 @@ export default function InvThread({ state }) {
         while (index < urls.length) {
             const startTime = performance.now();
             let url = urls[index]
-            let res = await fetch(`${local}/inv/thread5`, {
+            let res = await fetch(`${api}/inv/thread5`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ url, account: account })
@@ -724,7 +724,7 @@ export default function InvThread({ state }) {
         while (index < urls.length) {
             const startTime = performance.now();
             let url = urls[index]
-            let res = await fetch(`${local}/inv/thread6`, {
+            let res = await fetch(`${api}/inv/thread6`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ url, account: account })
@@ -756,7 +756,7 @@ export default function InvThread({ state }) {
         while (index < urls.length) {
             const startTime = performance.now();
             let url = urls[index]
-            let res = await fetch(`${local}/inv/thread7`, {
+            let res = await fetch(`${api}/inv/thread7`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ url, account: account })
@@ -788,7 +788,7 @@ export default function InvThread({ state }) {
         while (index < urls.length) {
             const startTime = performance.now();
             let url = urls[index]
-            let res = await fetch(`${local}/inv/thread8`, {
+            let res = await fetch(`${api}/inv/thread8`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ url, account: account })
@@ -820,7 +820,7 @@ export default function InvThread({ state }) {
         while (index < urls.length) {
             const startTime = performance.now();
             let url = urls[index]
-            let res = await fetch(`${local}/inv/thread9`, {
+            let res = await fetch(`${api}/inv/thread9`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ url, account: account })
@@ -852,7 +852,7 @@ export default function InvThread({ state }) {
         while (index < urls.length) {
             const startTime = performance.now();
             let url = urls[index]
-            let res = await fetch(`${local}/inv/thread10`, {
+            let res = await fetch(`${api}/inv/thread10`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ url, account: account })
@@ -884,7 +884,7 @@ export default function InvThread({ state }) {
         while (index < urls.length) {
             const startTime = performance.now();
             let url = urls[index]
-            let res = await fetch(`${local}/inv/thread11`, {
+            let res = await fetch(`${api}/inv/thread11`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ url, account: account })
@@ -915,7 +915,7 @@ export default function InvThread({ state }) {
         while (index < urls.length) {
             const startTime = performance.now();
             let url = urls[index]
-            let res = await fetch(`${local}/inv/thread12`, {
+            let res = await fetch(`${api}/inv/thread12`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ url, account: account })
@@ -947,7 +947,7 @@ export default function InvThread({ state }) {
         while (index < urls.length) {
             const startTime = performance.now();
             let url = urls[index]
-            let res = await fetch(`${local}/inv/thread13`, {
+            let res = await fetch(`${api}/inv/thread13`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ url, account: account })
@@ -979,7 +979,7 @@ export default function InvThread({ state }) {
         while (index < urls.length) {
             const startTime = performance.now();
             let url = urls[index]
-            let res = await fetch(`${local}/inv/thread14`, {
+            let res = await fetch(`${api}/inv/thread14`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ url, account: account })
@@ -1010,7 +1010,7 @@ export default function InvThread({ state }) {
         while (index < urls.length) {
             const startTime = performance.now();
             let url = urls[index]
-            let res = await fetch(`${local}/inv/thread15`, {
+            let res = await fetch(`${api}/inv/thread15`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ url, account: account })
@@ -1042,7 +1042,7 @@ export default function InvThread({ state }) {
         while (index < urls.length) {
             const startTime = performance.now();
             let url = urls[index]
-            let res = await fetch(`${local}/inv/thread16`, {
+            let res = await fetch(`${api}/inv/thread16`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ url, account: account })
@@ -1072,7 +1072,7 @@ export default function InvThread({ state }) {
         while (index < urls.length) {
             const startTime = performance.now();
             let url = urls[index]
-            let res = await fetch(`${local}/inv/thread17`, {
+            let res = await fetch(`${api}/inv/thread17`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ url, account: account })
@@ -1101,7 +1101,7 @@ export default function InvThread({ state }) {
         while (index < urls.length) {
             const startTime = performance.now();
             let url = urls[index]
-            let res = await fetch(`${local}/inv/thread18`, {
+            let res = await fetch(`${api}/inv/thread18`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ url, account: account })

@@ -27,7 +27,7 @@ const E_login = () => {
             setError('Please fill in both fields.');
             return;
         }
-        let res = await fetch(`${local}/auth/login`, {
+        let res = await fetch(`${api}/auth/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password, loginType })

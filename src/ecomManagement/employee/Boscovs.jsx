@@ -51,7 +51,7 @@ export default function Boscovs() {
 
     const [isbusy, setBusy] = useState(false)
     const checkifbusy = async () => {
-        let res = await fetch(`${local}/inv/checkifbusy`, {
+        let res = await fetch(`${api}/inv/checkifbusy`, {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' }
         })
@@ -64,7 +64,7 @@ export default function Boscovs() {
         try {
            
             if (account) {
-                let res = await fetch(`${local}/scrap/boscovs/currentdetails`, {
+                let res = await fetch(`${api}/scrap/boscovs/currentdetails`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ account:account })
@@ -88,7 +88,7 @@ export default function Boscovs() {
     // --------refresh details while fetcing url-------
 
     async function refreshdetails() {
-        let res = await fetch(`${local}/scrap/belk/refreshdetails`, {
+        let res = await fetch(`${api}/scrap/belk/refreshdetails`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ account: profile.account })
@@ -117,7 +117,7 @@ export default function Boscovs() {
     }
 
     const downloadProductExcel = async () => {
-        let res = await fetch(`${local}/scrap/belk/downloadProductExcel`, {
+        let res = await fetch(`${api}/scrap/belk/downloadProductExcel`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ account: profile.account })
@@ -173,7 +173,7 @@ export default function Boscovs() {
             const formData = new FormData();
             formData.append('file', file);
             formData.append('account', profile.account);
-            var resp = await axios.post(`${local}/scrap/belk/uploadforcheck`, formData, {
+            var resp = await axios.post(`${api}/scrap/belk/uploadforcheck`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -200,7 +200,7 @@ export default function Boscovs() {
     };
     const [html, setHtml] = useState('')
     const fetchurl = async () => {
-        let res = await fetch(`${local}/scrap/boscovs/fetchurl`, {
+        let res = await fetch(`${api}/scrap/boscovs/fetchurl`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ html: html, profile: profile})
@@ -218,7 +218,7 @@ export default function Boscovs() {
     }
 
     async function deleteoldurls() {
-        let res = await fetch(`${local}/scrap/boscovs/deleteoldurls`, {
+        let res = await fetch(`${api}/scrap/boscovs/deleteoldurls`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ account: profile.account })

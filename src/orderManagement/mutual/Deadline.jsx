@@ -41,7 +41,7 @@ export default function Deadline({ state }) {
     };
     async function deadline(account) {
         setLoading(true)
-        let res = await fetch(`${local}/om/data/deadline`, {
+        let res = await fetch(`${api}/om/data/deadline`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ account })
@@ -71,7 +71,7 @@ export default function Deadline({ state }) {
         formData.append("pdf", file);
         formData.append("id", id);
         formData.append("uploadedby", state.name)
-        let res = await fetch(`${local}/upload/updatepdflink`, {
+        let res = await fetch(`${api}/upload/updatepdflink`, {
             method: "POST",
             body: formData,
             headers: {

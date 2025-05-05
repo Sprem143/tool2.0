@@ -39,7 +39,7 @@ export default function Employee2() {
     }, []);
 
     async function getprofile(token) {
-        let res = await fetch(`${local}/om/employee/getprofile`, {
+        let res = await fetch(`${api}/om/employee/getprofile`, {
             method: 'GET',
             headers: { 'Authorization': `Bearer ${token}` }
         })
@@ -140,7 +140,7 @@ export default function Employee2() {
     const [cards, setCards] = useState([])
     //  get card details -------
     async function getcarddetails(account) {
-        let res = await fetch(`${local}/om/data/getcarddetails`, {
+        let res = await fetch(`${api}/om/data/getcarddetails`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ account: account })
@@ -180,7 +180,7 @@ export default function Employee2() {
 
     const addproduct = async () => {
         try {
-            let res = await fetch(`${local}/om/data/addproduct`, {
+            let res = await fetch(`${api}/om/data/addproduct`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ product: order, id: profile.name, editid: editid })
@@ -262,7 +262,7 @@ export default function Employee2() {
         formData.append("pdf", file);
         formData.append("id", id);
         formData.append("uploadedby", profile.name)
-        let res = await fetch(`${local}/upload/updatepdflink`, {
+        let res = await fetch(`${api}/upload/updatepdflink`, {
             method: "POST",
             body: formData,
             headers: {
@@ -288,7 +288,7 @@ export default function Employee2() {
         setMsg("Uploading pdf.. Wait..")
         const formData = new FormData();
         formData.append("pdf", file);
-        let res = await fetch(`${local}/upload/getpdflink`, {
+        let res = await fetch(`${api}/upload/getpdflink`, {
             method: "POST",
             body: formData,
             headers: {}
@@ -327,7 +327,7 @@ export default function Employee2() {
         const clientid = profile.clientid
         const secretkey = profile.secretkey
         console.log(clientid, secretkey)
-        const response = await fetch(`${local}/api/google/auth`, {
+        const response = await fetch(`${api}/api/google/auth`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({

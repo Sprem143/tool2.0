@@ -30,7 +30,7 @@ const O_login = () => {
         setValidated(true);
         if (loginType == 'admin') {
             try {
-                let result = await fetch(`${local}/om/admin/login`, {
+                let result = await fetch(`${api}/om/admin/login`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email: email, password: password, loginType: loginType  })
@@ -45,7 +45,7 @@ const O_login = () => {
             }
         } else if (loginType == 'employee') {
             try {
-                let result = await fetch(`${local}/om/employee/login`, {
+                let result = await fetch(`${api}/om/employee/login`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email, password, loginType })

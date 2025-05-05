@@ -53,7 +53,7 @@ export default function OsEmpSignup() {
 
             setErrors({});
             setLoading(true)
-            let res = await fetch(`${local}/om/employee/signup`, {
+            let res = await fetch(`${api}/om/employee/signup`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ formData })
@@ -71,7 +71,7 @@ export default function OsEmpSignup() {
         setLoading(true)
 
         if (email) {
-            let res = await fetch(`${local}/om/employee/sendotp`, {
+            let res = await fetch(`${api}/om/employee/sendotp`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email })
@@ -104,7 +104,7 @@ export default function OsEmpSignup() {
         setLoading(true)
         let formData2 = new FormData();
         formData2.append('file', file);
-        let res = await fetch(`${local}/upload/uploadprofilepic`, {
+        let res = await fetch(`${api}/upload/uploadprofilepic`, {
             method: 'POST',
             body: formData2,
             headers: {}

@@ -22,7 +22,7 @@ export default function Search({ sk }) {
         if (sk.key && sk.searchby) {
             key = key.trim()
             searchby = searchby.trim()
-            let res = await fetch(`${local}/om/data/search`, {
+            let res = await fetch(`${api}/om/data/search`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ key, searchby })

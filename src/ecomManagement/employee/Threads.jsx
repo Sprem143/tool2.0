@@ -55,7 +55,7 @@ export default function Threads({ state }) {
         let index = 0;
         while (index < urls.length) {
             let url = urls[index]
-            let res = await fetch(`${local}/scrap/belk/thread1`, {
+            let res = await fetch(`${api}/scrap/belk/thread1`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ url, account: account })
@@ -81,7 +81,7 @@ export default function Threads({ state }) {
         let index = 0;
         while (index < urls.length) {
             let url = urls[index]
-            let res = await fetch(`${local}/scrap/belk/thread2`, {
+            let res = await fetch(`${api}/scrap/belk/thread2`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ url, account: account })
@@ -107,7 +107,7 @@ export default function Threads({ state }) {
         let index = 0;
         while (index < urls.length) {
             let url = urls[index]
-            let res = await fetch(`${local}/scrap/belk/thread3`, {
+            let res = await fetch(`${api}/scrap/belk/thread3`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ url, account: account })
@@ -133,7 +133,7 @@ export default function Threads({ state }) {
         let index = 0;
         while (index < urls.length) {
             let url = urls[index]
-            let res = await fetch(`${local}/scrap/belk/thread4`, {
+            let res = await fetch(`${api}/scrap/belk/thread4`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ url, account: account })
@@ -159,7 +159,7 @@ export default function Threads({ state }) {
         let index = 0;
         while (index < urls.length) {
             let url = urls[index]
-            let res = await fetch(`${local}/scrap/belk/thread5`, {
+            let res = await fetch(`${api}/scrap/belk/thread5`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ url, account: account })
@@ -185,7 +185,7 @@ export default function Threads({ state }) {
         let index = 0;
         while (index < urls.length) {
             let url = urls[index]
-            let res = await fetch(`${local}/scrap/belk/thread6`, {
+            let res = await fetch(`${api}/scrap/belk/thread6`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ url, account: account })
@@ -211,7 +211,7 @@ export default function Threads({ state }) {
         let index = 0;
         while (index < urls.length) {
             let url = urls[index]
-            let res = await fetch(`${local}/scrap/belk/thread7`, {
+            let res = await fetch(`${api}/scrap/belk/thread7`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ url, account: account })
@@ -237,7 +237,7 @@ export default function Threads({ state }) {
         let index = 0;
         while (index < urls.length) {
             let url = urls[index]
-            let res = await fetch(`${local}/scrap/belk/thread8`, {
+            let res = await fetch(`${api}/scrap/belk/thread8`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ url, account: account })
@@ -263,7 +263,7 @@ export default function Threads({ state }) {
         let index = 0;
         while (index < urls.length) {
             let url = urls[index]
-            let res = await fetch(`${local}/scrap/belk/thread9`, {
+            let res = await fetch(`${api}/scrap/belk/thread9`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ url, account: account })
@@ -289,7 +289,7 @@ export default function Threads({ state }) {
         let index = 0;
         while (index < urls.length) {
             let url = urls[index]
-            let res = await fetch(`${local}/scrap/belk/thread10`, {
+            let res = await fetch(`${api}/scrap/belk/thread10`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ url, account: account })
@@ -315,7 +315,7 @@ export default function Threads({ state }) {
         let index = 0;
         while (index < urls.length) {
             let url = urls[index]
-            let res = await fetch(`${local}/scrap/belk/thread11`, {
+            let res = await fetch(`${api}/scrap/belk/thread11`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ url, account: account })
@@ -340,7 +340,7 @@ export default function Threads({ state }) {
         let index = 0;
         while (index < urls.length) {
             let url = urls[index]
-            let res = await fetch(`${local}/scrap/belk/thread12`, {
+            let res = await fetch(`${api}/scrap/belk/thread12`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ url, account: account })
@@ -366,7 +366,7 @@ export default function Threads({ state }) {
         let index = 0;
         while (index < urls.length) {
             let url = urls[index]
-            let res = await fetch(`${local}/scrap/belk/thread13`, {
+            let res = await fetch(`${api}/scrap/belk/thread13`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ url, account: account })
@@ -392,7 +392,7 @@ export default function Threads({ state }) {
         let index = 0;
         while (index < urls.length) {
             let url = urls[index]
-            let res = await fetch(`${local}/scrap/belk/thread14`, {
+            let res = await fetch(`${api}/scrap/belk/thread14`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ url, account: account })
@@ -417,7 +417,7 @@ export default function Threads({ state }) {
         let index = 0;
         while (index < urls.length) {
             let url = urls[index]
-            let res = await fetch(`${local}/scrap/belk/thread15`, {
+            let res = await fetch(`${api}/scrap/belk/thread15`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ url, account: account })
@@ -443,7 +443,7 @@ export default function Threads({ state }) {
         let index = 0;
         while (index < urls.length) {
             let url = urls[index]
-            let res = await fetch(`${local}/scrap/belk/thread16`, {
+            let res = await fetch(`${api}/scrap/belk/thread16`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ url, account: account })
@@ -467,7 +467,7 @@ export default function Threads({ state }) {
         let index = 0;
         while (index < urls.length) {
             let url = urls[index]
-            let res = await fetch(`${local}/scrap/belk/thread17`, {
+            let res = await fetch(`${api}/scrap/belk/thread17`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ url, account: account })
@@ -490,7 +490,7 @@ export default function Threads({ state }) {
         let index = 0;
         while (index < urls.length) {
             let url = urls[index]
-            let res = await fetch(`${local}/scrap/belk/thread18`, {
+            let res = await fetch(`${api}/scrap/belk/thread18`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ url, account: account })

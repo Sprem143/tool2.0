@@ -41,7 +41,7 @@ export default function ExtractSKU() {
 
 
     const downloadProductExcel = async () => {
-        let res = await fetch(`${local}/scrap/belk/downloadProductExcel`, {
+        let res = await fetch(`${api}/scrap/belk/downloadProductExcel`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ account: profile.account })
@@ -92,7 +92,7 @@ export default function ExtractSKU() {
             const formData = new FormData();
             formData.append('file', file);
             formData.append('account', profile.account);
-            var resp = await axios.post(`${local}/scrap/belk/uploadforcheck`, formData, {
+            var resp = await axios.post(`${api}/scrap/belk/uploadforcheck`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }

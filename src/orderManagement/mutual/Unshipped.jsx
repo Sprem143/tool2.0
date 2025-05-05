@@ -41,7 +41,7 @@ export default function Unshipped({ state }) {
     };
     async function unshipped(account) {
         setLoading(true)
-        let res = await fetch(`${local}/om/data/unshipped`, {
+        let res = await fetch(`${api}/om/data/unshipped`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ account })
@@ -63,7 +63,7 @@ export default function Unshipped({ state }) {
             alert('Order id require')
             return;
         }
-        let res = await fetch(`${local}/om/data/changestatus`, {
+        let res = await fetch(`${api}/om/data/changestatus`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ id, status })
@@ -91,7 +91,7 @@ export default function Unshipped({ state }) {
         formData.append("pdf", file);
         formData.append("id", id);
         formData.append("uploadedby", state.name)
-        let res = await fetch(`${local}/ulpoad/updatepdflink`, {
+        let res = await fetch(`${api}/ulpoad/updatepdflink`, {
             method: "POST",
             body: formData,
             headers: {

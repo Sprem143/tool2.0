@@ -78,7 +78,7 @@ export default function Admin() {
     const [cards, setCards] = useState([])
     //  get card details -------
     async function getcarddetails() {
-        let res = await fetch(`${local}/om/data/getadmincarddetails`, {
+        let res = await fetch(`${api}/om/data/getadmincarddetails`, {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
         })
@@ -111,7 +111,7 @@ export default function Admin() {
         { label: "Return date", id: "returnDate", type: "date", editable: true }
     ];
     async function getprofile(token) {
-        let res = await fetch(`${local}/om/admin/getprofile`, {
+        let res = await fetch(`${api}/om/admin/getprofile`, {
             method: 'GET',
             headers: { 'Authorization': `Bearer ${token}` }
         })
@@ -129,7 +129,7 @@ export default function Admin() {
 
     const addproduct = async () => {
         try {
-            let res = await fetch(`${local}/om/data/addproduct`, {
+            let res = await fetch(`${api}/om/data/addproduct`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ product: order, id: profile.name, editid: editid })
@@ -203,7 +203,7 @@ export default function Admin() {
         formData.append("pdf", file);
         formData.append("id", id);
         formData.append("uploadedby", profile.name)
-        let res = await fetch(`${local}/ulpoad/updatepdflink`, {
+        let res = await fetch(`${api}/ulpoad/updatepdflink`, {
             method: "POST",
             body: formData,
             headers: {
@@ -229,7 +229,7 @@ export default function Admin() {
         setMsg("Uploading pdf.. Wait..")
         const formData = new FormData();
         formData.append("pdf", file);
-        let res = await fetch(`${local}/ulpoad/getpdflink`, {
+        let res = await fetch(`${api}/ulpoad/getpdflink`, {
             method: "POST",
             body: formData,
             headers: {}
@@ -258,7 +258,7 @@ export default function Admin() {
 
     async function deleteentry(id) {
         if (id) {
-            let res = await fetch(`${local}/om/data/deleteentry`, {
+            let res = await fetch(`${api}/om/data/deleteentry`, {
                 method: 'DELETE',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ id: id })

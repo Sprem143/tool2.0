@@ -60,7 +60,7 @@ export default function Inventory() {
         console.log(account)
         if (account) {
             setLoading(true)
-            let res = await fetch(`${local}/inv/getproductlink`, {
+            let res = await fetch(`${api}/inv/getproductlink`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -84,7 +84,7 @@ export default function Inventory() {
     async function downloadSyncedProduct() {
         try {
             setLoading(true)
-            const response = await fetch(`${local}/inv/downloadSyncedProduct`, {
+            const response = await fetch(`${api}/inv/downloadSyncedProduct`, {
                 method: "POST",
                 body: JSON.stringify({ account: profile.account }),
                 headers: { 'Content-Type': 'application/json' }
@@ -105,7 +105,7 @@ export default function Inventory() {
 
     const downloadBackup = async () => {
         try {
-            const response = await fetch(`${local}/inv/downloadBackup`, {
+            const response = await fetch(`${api}/inv/downloadBackup`, {
                 method: "GET",
             });
             const blob = await response.blob();

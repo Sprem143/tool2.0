@@ -27,7 +27,7 @@ export default function Brandscrapping() {
     const [showthread, setShowthread] = useState(false)
 
     async function checklogin(token) {
-        let res = await fetch(`${local}/om/employee/getprofile`, {
+        let res = await fetch(`${api}/om/employee/getprofile`, {
             method: 'GET',
             headers: { 'Authorization': `Bearer ${token}` }
         })
@@ -62,7 +62,7 @@ export default function Brandscrapping() {
 
     const [isbusy, setBusy] = useState(false)
     const checkifbusy = async () => {
-        let res = await fetch(`${local}/inv/checkifbusy`, {
+        let res = await fetch(`${api}/inv/checkifbusy`, {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' }
         })
@@ -74,7 +74,7 @@ export default function Brandscrapping() {
     const getupdatedproduct = async () => {
         try {
             if (profile?.account) {
-                let res = await fetch(`${local}/scrap/belk/currentdetails`, {
+                let res = await fetch(`${api}/scrap/belk/currentdetails`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ account: profile.account })
@@ -120,7 +120,7 @@ export default function Brandscrapping() {
                 let ans = checkbrandname(url, brandname)
                 if (ans) {
                     setLoading(true)
-                    let result = await fetch(`${local}/scrap/belk/fetchbrand`, {
+                    let result = await fetch(`${api}/scrap/belk/fetchbrand`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ url, num, brandname, profile })
@@ -151,7 +151,7 @@ export default function Brandscrapping() {
     // --------refresh details while fetcing url-------
     const [currentstatus, setCurrentstatus] = useState(null)
     async function refreshdetails() {
-        let res = await fetch(`${local}/scrap/belk/refreshdetails`, {
+        let res = await fetch(`${api}/scrap/belk/refreshdetails`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ account: profile.account })
@@ -180,7 +180,7 @@ export default function Brandscrapping() {
     }
 
     const downloadProductExcel = async () => {
-        let res = await fetch(`${local}/scrap/belk/downloadProductExcel`, {
+        let res = await fetch(`${api}/scrap/belk/downloadProductExcel`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ account: profile.account })
@@ -248,7 +248,7 @@ export default function Brandscrapping() {
             const formData = new FormData();
             formData.append('file', file);
             formData.append('account', profile.account);
-            var resp = await axios.post(`${local}/scrap/belk/uploadforcheck`, formData, {
+            var resp = await axios.post(`${api}/scrap/belk/uploadforcheck`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
