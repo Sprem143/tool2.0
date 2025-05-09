@@ -147,6 +147,12 @@ export default function CheckProduct() {
         }
     }
 
+    function filterProduct() {
+        let filtered = realdata.filter((r) => r.SKU.length <= 40 && r['Product price']<80)
+    
+        setData(filtered)
+    }
+
     const editsku = async () => {
         let res = await fetch(`${api}/brand/editsku`, {
             method: 'PUT',
@@ -177,7 +183,7 @@ export default function CheckProduct() {
                 'Belk link': d['Belk link'],
                 'Brand': d.Brand || Brand,
                 'upc': "'" + d.UPC,
-                'UPC':'UPC'+ d.UPC,
+                'UPC': 'UPC' + d.UPC,
                 'ASIN': d.ASIN,
                 'gap1': '',
                 'gap2': '',
@@ -316,11 +322,11 @@ export default function CheckProduct() {
             }
 
             <div className="container ps-4 pe-4" style={{ opacity: loading ? 0.1 : 1, color: loading ? 'black' : null, zIndex: '10000', width: '100vw', minHeight: '100vh' }}>
-<div className="importantlink">
-    <ul className="links d-flex align-items-center" >
-        <li className="ps-4 pe-4"> <Link to='/om/employee'>Home Page</Link> </li>
-    </ul>
-</div>
+                <div className="importantlink">
+                    <ul className="links d-flex align-items-center" >
+                        <li className="ps-4 pe-4"> <Link to='/om/employee'>Home Page</Link> </li>
+                    </ul>
+                </div>
                 {showAlert && (
                     <div className="d-flex justify-content-end">
                         <h5
@@ -353,8 +359,9 @@ export default function CheckProduct() {
 
                 <div className="container d-flex justify-content-center border border-secondary p-4 align-items-center flex-column">
                     <div className="tableheader row w-100">
-                        <div className="col-md-2"> <button className="nobtn p-2 text-white" onClick={all}><h5>Total Products : {realdata.length}</h5></button></div>
+                        <div className="col-md-2"> <button className="nobtn p-2 text-white" onClick={all}><h5>Total Products : {data.length}</h5></button></div>
                         <div className="col-md-3"> <button onClick={setUncheckproduct} className="nobtn p-2 text-white"><h5>Unchecked Products : {realdata.length - check}</h5></button></div>
+                        <div className="col-md-3"> <button onClick={filterProduct} className="nobtn p-2 text-white"><h5>Filter</h5></button></div>
                         <div className="col-md-2"> <button onClick={refresh} className="nobtn p-2 text-white"><h5> Refresh <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" className="ms-2 mb-1 bi bi-arrow-clockwise" viewBox="0 0 16 16">
                             <path fillRule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z" />
                             <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466" />
@@ -366,7 +373,7 @@ export default function CheckProduct() {
                         </div>
                     </div>
 
-                    <Table striped bordered hover variant="dark" style={{width:'90vw', fontSize:'1.2em'}} >
+                    <Table striped bordered hover variant="dark" style={{ width: '90vw', fontSize: '1.2em' }} >
                         <thead>
                             <tr>
                                 <th>No</th>

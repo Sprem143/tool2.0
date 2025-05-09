@@ -53,6 +53,7 @@ const O_login = () => {
                 result = await result.json();
                 setLoading(false)
                 if (result.token) {
+                    
                     setUser(result.profile)
                     localStorage.setItem('user', JSON.stringify(result.profile))
                     result.role == 'operator'?   localStorage.setItem('gstar_om_employee', result.token):  localStorage.setItem('gstar_prep_employee', result.token)

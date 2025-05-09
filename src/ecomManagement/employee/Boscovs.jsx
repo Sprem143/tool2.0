@@ -62,12 +62,12 @@ export default function Boscovs() {
 
     const getupdatedproduct = async (account) => {
         try {
-           
+
             if (account) {
                 let res = await fetch(`${api}/scrap/boscovs/currentdetails`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ account:account })
+                    body: JSON.stringify({ account: account })
                 })
                 res = await res.json();
                 console.log(res)
@@ -113,7 +113,7 @@ export default function Boscovs() {
 
 
     const scrapproduct = async () => {
-    setShowthread(true) 
+        setShowthread(true)
     }
 
     const downloadProductExcel = async () => {
@@ -181,7 +181,7 @@ export default function Boscovs() {
             setLoading(false);
             if (resp.data.status) {
                 let dataarray = resp.data.data.length
-                if(dataarray==0){
+                if (dataarray == 0) {
                     alert('No product found on amazon')
                     return;
                 }
@@ -203,14 +203,14 @@ export default function Boscovs() {
         let res = await fetch(`${api}/scrap/boscovs/fetchurl`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ html: html, profile: profile})
+            body: JSON.stringify({ html: html, profile: profile })
         })
         res = await res.json();
-        if(res.status=='exist'){
+        if (res.status == 'exist') {
             alert(`This brand is already scrapped by ${res.data.name} on data - ${res.data.Date}`)
         }
-        else if(res.status) {
-          setLink(res.url)
+        else if (res.status) {
+            setLink(res.url)
             setHtml('')
         } else {
             console.log(res.msg)
@@ -284,7 +284,7 @@ export default function Boscovs() {
                             <Button variant="secondary" onClick={handleClose}>
                                 Close
                             </Button>
-                            <Button variant="primary" onClick={()=>{handleClose(), fetchurl()}}>
+                            <Button variant="primary" onClick={() => { handleClose(), fetchurl() }}>
                                 Save Changes
                             </Button>
                         </Modal.Footer>
@@ -309,54 +309,54 @@ export default function Boscovs() {
 
 
 
-                   
-                        <div className="container w-100 d-flex justify-content-center align-items-center">
-                            <button className='m-2' onClick={() => handleshow('url')}> <a href="#urllist" className='text-dark'>Total product url - {link.length}</a> </button>
-                            <button className='m-2' onClick={getupdatedproduct}> <div className="timer" >
-                                Total fetched Product : {currentstatus?.fetchedproduct} <span ><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="ms-4 bi bi-arrow-clockwise" viewBox="0 0 16 16">
-                                    <path fillRule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z" />
-                                    <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466" />
-                                </svg></span>
-                            </div></button>
 
-                            {link.length > 0 &&
-                                <>
-                                    <Dropdown>
-                                        <Dropdown.Toggle variant="" className='text-white border m-0 p-2' id="dropdown-basic">
-                                            Select Speed
-                                        </Dropdown.Toggle>
+                    <div className="container w-100 d-flex justify-content-center align-items-center">
+                        <button className='m-2' onClick={() => handleshow('url')}> <a href="#urllist" className='text-dark'>Total product url - {link.length}</a> </button>
+                        <button className='m-2' onClick={getupdatedproduct}> <div className="timer" >
+                            Total fetched Product : {currentstatus?.fetchedproduct} <span ><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="ms-4 bi bi-arrow-clockwise" viewBox="0 0 16 16">
+                                <path fillRule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z" />
+                                <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466" />
+                            </svg></span>
+                        </div></button>
 
-                                        <Dropdown.Menu>
+                        {link.length > 0 &&
+                            <>
+                                <Dropdown>
+                                    <Dropdown.Toggle variant="" className='text-white border m-0 p-2' id="dropdown-basic">
+                                        Select Speed
+                                    </Dropdown.Toggle>
 
-                                            <Dropdown.Item onClick={() => setThread(6)}>6</Dropdown.Item>
-                                            <Dropdown.Item onClick={() => setThread(7)}>7</Dropdown.Item>
-                                            <Dropdown.Item onClick={() => setThread(8)}>8</Dropdown.Item>
-                                            <Dropdown.Item onClick={() => setThread(9)}>9</Dropdown.Item>
-                                            <Dropdown.Item onClick={() => setThread(10)}>10</Dropdown.Item>
-                                            <Dropdown.Item onClick={() => setThread(11)}>11</Dropdown.Item>
-                                            <Dropdown.Item onClick={() => setThread(12)}>12</Dropdown.Item>
-                                            <Dropdown.Item onClick={() => setThread(13)}>13</Dropdown.Item>
-                                            <Dropdown.Item onClick={() => setThread(14)}>14</Dropdown.Item>
-                                            <Dropdown.Item onClick={() => setThread(15)}>15</Dropdown.Item>
-                                            <Dropdown.Item onClick={() => setThread(16)}>16</Dropdown.Item>
-                                            <Dropdown.Item onClick={() => setThread(17)}>17</Dropdown.Item>
-                                            <Dropdown.Item onClick={() => setThread(18)}>18</Dropdown.Item>
+                                    <Dropdown.Menu>
 
-                                        </Dropdown.Menu>
-                                    </Dropdown>
-                                    <button className='m-2' onClick={scrapproduct} disabled={isbusy}>Start Scraping UPCs</button>
+                                        <Dropdown.Item onClick={() => setThread(6)}>6</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => setThread(7)}>7</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => setThread(8)}>8</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => setThread(9)}>9</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => setThread(10)}>10</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => setThread(11)}>11</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => setThread(12)}>12</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => setThread(13)}>13</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => setThread(14)}>14</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => setThread(15)}>15</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => setThread(16)}>16</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => setThread(17)}>17</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => setThread(18)}>18</Dropdown.Item>
 
-                                </>
-                            }
-                            {currentstatus?.fetchedproduct > 0 &&
-                                <>
-                                    <button className='ms-4 mt-4 mb-3' variant="secondary" onClick={downloadProductExcel}>
-                                        Download Products List
-                                    </button>
-                                    <input type="file" onChange={(e) => handleFileChange(e.target.files[0])} accept=".xlsx, .xls, .xlsm" />                                </>
-                            }
-                        </div>
-                    
+                                    </Dropdown.Menu>
+                                </Dropdown>
+                                <button className='m-2' onClick={scrapproduct} disabled={isbusy}>Start Scraping UPCs</button>
+
+                            </>
+                        }
+                        {currentstatus?.fetchedproduct > 0 &&
+                            <>
+                                <button className='ms-4 mt-4 mb-3' variant="secondary" onClick={downloadProductExcel}>
+                                    Download Products List
+                                </button>
+                                <input type="file" onChange={(e) => handleFileChange(e.target.files[0])} accept=".xlsx, .xls, .xlsm" />                                </>
+                        }
+                    </div>
+
 
                     {showthread &&
                         <div id="profile" className='mt-4'>

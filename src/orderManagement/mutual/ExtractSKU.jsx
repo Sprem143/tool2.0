@@ -14,109 +14,35 @@ import Modal from 'react-bootstrap/Modal';
 
 export default function ExtractSKU() {
 
-    const local = 'http://localhost:10000'
-    const api = 'https://brand-b-1.onrender.com'
-
-    const navigate = useNavigate()
-    const [profile, setProfile] = useState(null);
-    const [showthread, setShowthread] = useState(false)
-
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    useEffect(() => {
-        let user = JSON.parse(localStorage.getItem('user'))
-        user && setProfile(user)
-    }, [])
-
-
-    const [file, setFile] = useState('');
     const [loading, setLoading] = useState(false);
-    const [link, setLink] = useState([]);
     const [msg, setMsg] = useState('Please wait')
-    const [currentstatus, setCurrentstatus] = useState(null)
-
+    const [sku, setSku] = useState([])
 
 
 
     const downloadProductExcel = async () => {
-        let res = await fetch(`${api}/scrap/belk/downloadProductExcel`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ account: profile.account })
-        });
-        res = await res.json();
-        if (res.status && Array.isArray(res.data) && res.data.length > 0) {
-            res.count > 0 ? alert(`${res.count} already listed so these products will be deleted from sheet`) : null
-            let products = res.data.filter((d) => d.quantity > 2)
-            let jsondata = products.map((d) => {
-                return {
-                    'UPC': 'UPC' + d.upc,
-                    'upc2': d.upc,
-                    'upc3': d.upc,
-                    'SKU': d.sku,
-                    'Size': d.size,
-                    'Color': d.color,
-                    'Product price': d.price,
-                    'Price Range': d.pricerange,
-                    'Quantity': d.quantity,
-                    'Belk link': d.url,
-                    'Image link': d.imgurl,
-                    'ASIN': '',
-                    'Title': ''
-                }
-            })
-            jsondata = Array.from(jsondata.reduce((map, item) => map.set(item.UPC, item), new Map()).values());
-            const wb = XLSX.utils.book_new()
-            const ws = XLSX.utils.json_to_sheet(jsondata);
-            XLSX.utils.book_append_sheet(wb, ws, 'Sheet1')
-            const sheet = XLSX.write(wb, { bookType: 'xlsx', type: 'array' })
-            const blob = new Blob([sheet], { type: 'application/octet-stream' })
 
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = 'Row_product_list.xlsx';
-            link.click();
-        } else {
-            alert('No data found');
-            console.log(res.msg)
-        }
+        let jsondata = sku.map((d) => {
+            return {
+                SKU: d
+            }
+        })
+        const wb = XLSX.utils.book_new()
+        const ws = XLSX.utils.json_to_sheet(jsondata);
+        XLSX.utils.book_append_sheet(wb, ws, 'Sheet1')
+        const sheet = XLSX.write(wb, { bookType: 'xlsx', type: 'array' })
+        const blob = new Blob([sheet], { type: 'application/octet-stream' })
+
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'Row_product_list.xlsx';
+        link.click();
     }
 
-
-
-    const uploadamzsheet = async (file) => {
-        setLoading(true);
-        if (file) {
-            const formData = new FormData();
-            formData.append('file', file);
-            formData.append('account', profile.account);
-            var resp = await axios.post(`${api}/scrap/belk/uploadforcheck`, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            });
-            setLoading(false);
-            if (resp.data.status) {
-                let dataarray = resp.data.data.length
-                if(dataarray==0){
-                    alert('No product found on amazon')
-                    return;
-                }
-                alert(`${dataarray} products found on amazon. Now you are redirecting to Check-product page`)
-                navigate('/ecom/check-product')
-            } else {
-                alert(resp.data.msg)
-                console.log(resp)
-            }
-        }
-        setLoading(false);
-    };
-    const handleFileChange = (doc) => {
-        setFile(doc);
-        uploadamzsheet(doc)
-    };
     const [html, setHtml] = useState('')
 
     function extractSKUFromRow() {
@@ -124,17 +50,19 @@ export default function ExtractSKU() {
         // Parse the HTML
         const parser = new DOMParser();
         const doc = parser.parseFromString(html, 'text/html');
-        
+
         // Find all elements that contain the SKU label
         const skuElements = doc.querySelectorAll('.sku');
         const skuList = Array.from(skuElements).map(el => {
-          const text = el.textContent || '';
-          const match = text.match(/SKU\s*:\s*(\S+)/);
-          return match ? match[1] : null;
+            const text = el.textContent || '';
+            const match = text.match(/SKU\s*:\s*(\S+)/);
+            return match ? match[1] : null;
         })
-        
-        console.log(skuList);
-      }
+        let newList = sku
+        newList = newList.concat(skuList)
+        newList = [... new Set(newList)]
+        setSku(newList)
+    }
 
     return (
 
@@ -189,7 +117,7 @@ export default function ExtractSKU() {
                             <Button variant="secondary" onClick={handleClose}>
                                 Close
                             </Button>
-                            <Button variant="primary" onClick={()=>{handleClose(), extractSKUFromRow()}}>
+                            <Button variant="primary" onClick={() => { handleClose(), extractSKUFromRow() }}>
                                 Save Changes
                             </Button>
                         </Modal.Footer>
@@ -198,13 +126,24 @@ export default function ExtractSKU() {
                     <div className="d-flex justify-content-center align-items-center">
                         <button className="themebtn" onClick={handleShow}>Add html</button>
                     </div>
-                    
-
-                   
 
 
+                    {
+                        sku.length > 0 &&
+                        <>
+                            <h4>Total SKU - {sku.length}</h4>
+                            <button onClick={downloadProductExcel}>Download</button>
+                            <ol>
+                                {sku.map(s=>(
+                                    <li>{s}</li>
+                                ))}
+                            </ol>
+                        </>
+                    }
 
-                  
+
+
+
                 </div>
             </div >
             <Outlet />

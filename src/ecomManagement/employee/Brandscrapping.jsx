@@ -13,8 +13,8 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import React, { lazy, Suspense } from "react";
 const Threads = lazy(() => import('./Threads'))
 const Urllist = lazy(() => import('./Urllist'))
-import { motion } from "motion/react"
 import ClockLoader from "react-spinners/ClockLoader";
+import Modal from 'react-bootstrap/Modal';
 
 
 export default function Brandscrapping() {
@@ -25,6 +25,10 @@ export default function Brandscrapping() {
     const navigate = useNavigate()
     const [profile, setProfile] = useState(null);
     const [showthread, setShowthread] = useState(false)
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+    const [html, setHtml] = useState('')
 
     async function checklogin(token) {
         let res = await fetch(`${api}/om/employee/getprofile`, {
@@ -80,10 +84,14 @@ export default function Brandscrapping() {
                     body: JSON.stringify({ account: profile.account })
                 })
                 res = await res.json();
-                if (res.status) {
-                    setCurrentstatus(prev => ({ ...prev, producturl: res.url, fetchedproduct: res.fetched }))
-                    setLink(res.link)
-                }
+                console.log(res)
+                if (res.status == '404') {
+                    console.log(res.msg)
+                } else
+                    if (res.status) {
+                        setCurrentstatus(prev => ({ ...prev, producturl: res.url, fetchedproduct: res.fetched }))
+                        setLink(res.link)
+                    }
             }
         } catch (err) {
             console.log(err);
@@ -254,21 +262,52 @@ export default function Brandscrapping() {
                 }
             });
             setLoading(false);
-            if(resp.data.status){
+            if (resp.data.status) {
                 let dataarray = resp.data.data.length
                 alert(`${dataarray} products found on amazon. Now you are redirecting to Check-product page`)
                 navigate('/ecom/check-product')
-            }else{
+            } else {
                 alert(resp.data.msg)
                 console.log(resp)
             }
         }
-       
+
     };
     const handleFileChange = (doc) => {
         setFile(doc);
         uploadamzsheet(doc)
     };
+
+    const fetchurl = async () => {
+        let res = await fetch(`${api}/scrap/belk/fetchurl`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ html: html, profile: profile })
+        })
+        res = await res.json();
+        if (res.status == 'exist') {
+            alert(`This brand is already scrapped by ${res.data.name} on data - ${res.data.Date}`)
+        }
+        else if (res.status) {
+            setCurrentstatus(prev => ({ ...prev, producturl: res.url, fetchedproduct: res.fetched }))
+            setLink(res.link)
+            setHtml('')
+        } else {
+            console.log(res.msg)
+        }
+    }
+
+    async function deleteoldurls() {
+        let res = await fetch(`${api}/scrap/boscovs/deleteoldurls`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ account: profile.account })
+        })
+        res = await res.json()
+        if (res.status) {
+            setCurrentstatus({ fetchedproduct: 0, fetchurl: 0 })
+        }
+    }
 
     return (
 
@@ -286,6 +325,25 @@ export default function Brandscrapping() {
             )}
 
             <div className="container ps-4 pe-4" style={{ opacity: loading ? 0.1 : 1, color: loading ? 'black' : null, zIndex: '10000', width: '100vw', minHeight: '100vh' }}>
+                <Modal show={show} onHide={handleClose} >
+                    <Modal.Header closeButton>
+                        <Modal.Title>Copy and Paste Source Code here</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <textarea name="htmlcode" id="htmlcode" cols={50} rows={10} placeholder='paste source code here' onChange={(e) => setHtml(e.target.value)} >
+
+                        </textarea>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose}>
+                            Close
+                        </Button>
+                        <Button variant="primary" onClick={() => { handleClose(), fetchurl() }}>
+                            Save Changes
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+
 
                 <div className="container-fluid pt-1 searchboxcontanier">
                     <div className="row ps-4 pe-4">
@@ -334,17 +392,31 @@ export default function Brandscrapping() {
 
                 </div>
                 <div className="p-4 pt-1">
+                    <h3 >Get Product Url</h3>
+                    <div className="container-fluid mb-4">
+                        <div className="row border border-secondary p-3">
+                            <div className="col-md-9 col-sm-12" style={{borderRight:'1px solid gray'}}>
+                                <h5 className='text-center'>By Brand URL</h5>
+                                <div className='w-100 d-flex justify-content-center'>
+                                    <input type="text" onChange={(e) => setUrl(e.target.value)} placeholder='Brand URL' className='w-25 p-2' />
+                                    <input type="number" className='ms-3 p-2' onChange={(e) => setNum(e.target.value)} placeholder='Number of products' />
+                                    <input type="text" className='ms-3 p-2' onChange={(e) => setBrand(e.target.value)} placeholder='Brand Name' />
 
-                    <div className='d-flex flex-column justify-content-center align-items-center w-100'>
-
-                        <div className='w-100 d-flex justify-content-center'>
-                            <input type="text" onChange={(e) => setUrl(e.target.value)} placeholder='Brand URL' className='w-25 p-2' />
-                            <input type="number" className='ms-3 p-2' onChange={(e) => setNum(e.target.value)} placeholder='Number of products' />
-                            <input type="text" className='ms-3 p-2' onChange={(e) => setBrand(e.target.value)} placeholder='Brand Name' />
-
-                            <button className='ms-4 p-3 ps-4 pe-4 themebtn' onClick={fetchbrand} disabled={isbusy}>Fetch product URLs</button>
+                                    <button className='ms-4 p-3 ps-4 pe-4 themebtn' onClick={fetchbrand} disabled={isbusy}>Fetch URLs</button>
+                                </div>
+                            </div>
+                            <div className="col-md-3 col-sm-12">
+                            <h5 className='text-center'>By HTML</h5>
+                                <div className="d-flex justify-content-center align-items-center">
+                                    <button className="themebtn" onClick={deleteoldurls}>Clear Previous Data</button>
+                                    <button className="themebtn" onClick={handleShow}>Add html</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
+
+
+
 
                     {currentstatus &&
                         <div className="container w-100 d-flex justify-content-center align-items-center">
@@ -421,8 +493,6 @@ export default function Brandscrapping() {
                         </div>
 
                     }
-
-
                     <br />
                     {currentstatus?.fetchedproduct > 0 && <h5 className='text-center mt-3'> <Link to='/ecom/check-product'>Check Final Data</Link></h5>}
                     <hr />
