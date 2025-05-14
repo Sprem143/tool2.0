@@ -354,7 +354,7 @@ export default function Walmart() {
                                 </svg></span>
                             </div></button>
 
-                            {link.length > 0 &&
+                            {Array.isArray(link) && link.length > 0 &&
                                 <>
                                     <Dropdown>
                                         <Dropdown.Toggle variant="" className='text-white border m-0 p-2' id="dropdown-basic">
