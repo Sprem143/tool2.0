@@ -510,17 +510,17 @@ export default function Threads({ state }) {
     };
     async function start() {
         const totalthread = link.length;
-    //   thread13()
-        for (let i = 0; i < totalthread; i++) {
-            const threadName = `thread${i + 1}`;
+      thread1()
+        // for (let i = 0; i < totalthread; i++) {
+        //     const threadName = `thread${i + 1}`;
 
-            if (threads[threadName]) {
-                threads[threadName]();
-                await delay(1000)
-            } else {
-                console.log(`No function defined for ${threadName}`);
-            }
-        }
+        //     if (threads[threadName]) {
+        //         threads[threadName]();
+        //         await delay(1000)
+        //     } else {
+        //         console.log(`No function defined for ${threadName}`);
+        //     }
+        // }
     }
     return (
         <>
@@ -547,7 +547,7 @@ export default function Threads({ state }) {
                                                             text={link[i]?.length? `${((index[`index${i + 1}`] / link[i].length) * 100).toFixed(0)}%`: '0%'}
                                                         />
                                                     </div>
-                                                    <a href={link[i][index[`index${i + 1}`]]} target='_blank'>{link[i][index[`index${i + 1}`]]}</a>
+                                                    <a href={link[i][index[`index${i + 1}`]]} target='_blank'>Visit Link</a>
                                                 </div>
                                             </div>
                                         </motion.div>

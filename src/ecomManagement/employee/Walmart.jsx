@@ -17,7 +17,7 @@ import { motion } from "motion/react"
 import ClockLoader from "react-spinners/ClockLoader";
 
 
-export default function Academy() {
+export default function Walmart() {
 
     const local = 'http://localhost:10000'
     const api = 'https://brand-b-1.onrender.com'
@@ -40,8 +40,9 @@ export default function Academy() {
     }
 
     useEffect(() => {
-       let user = JSON.parse(localStorage.getItem('user'))
-       setProfile(user)
+        let user = JSON.parse(localStorage.getItem('user'))
+        setProfile(user)
+         getupdatedproduct(user.account)
     }, [])
 
 
@@ -53,12 +54,8 @@ export default function Academy() {
     const [brand, setBrand] = useState('')
     const [msg, setMsg] = useState('Please wait')
     const [thread, setThread] = useState(10)
+    const [currentstatus, setCurrentstatus] = useState(null)
 
-    useEffect(() => {
-        // getproductslink();
-        // getupdatedproduct();
-        // checkifbusy()
-    }, []);
 
     const [isbusy, setBusy] = useState(false)
     const checkifbusy = async () => {
@@ -71,15 +68,17 @@ export default function Academy() {
     }
 
 
-    const getupdatedproduct = async () => {
+    const getupdatedproduct = async (account) => {
         try {
-            if (profile?.account) {
-                let res = await fetch(`${api}/scrap/academy/currentdetails`, {
+            if (account) {
+                console.log(account)
+                let res = await fetch(`${api}/scrap/walmart/currentdetails`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ account: profile.account })
+                    body: JSON.stringify({ account:account })
                 })
                 res = await res.json();
+                console.log(res)
                 if (res.status) {
                     setCurrentstatus(prev => ({ ...prev, producturl: res.url, fetchedproduct: res.fetched }))
                     setLink(res.link)
@@ -120,7 +119,7 @@ export default function Academy() {
                 if (ans) {
                     let account = profile.account
                     setLoading(true)
-                    let result = await fetch(`${api}/scrap/academy/fetchurl`, {
+                    let result = await fetch(`${api}/scrap/walmart/fetchurl`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ url, num, brandname, account })
@@ -133,8 +132,8 @@ export default function Academy() {
                         alert(`This brand is already scrapped by ${result.data?.name} on date ${result.data?.Date}. There are total ${result.data?.urls} products url found in that scrapping searched url was - ${result.data?.brandurl} .  You can't scrap this brand again. `)
                     }
                     else if (result.status) {
-                        setLink(result.url);
-                        setCurrentstatus(prev => ({ ...prev, producturl: result?.url.length }))
+                        setLink(result.data);
+                        setCurrentstatus(prev => ({ ...prev, producturl: result?.data.length }))
                     } else if (result.status == false) {
                         alert(result.msg)
                     }
@@ -149,7 +148,7 @@ export default function Academy() {
         }
     }
     // --------refresh details while fetcing url-------
-    const [currentstatus, setCurrentstatus] = useState(null)
+
     async function refreshdetails() {
         let res = await fetch(`${api}/scrap/academy/refreshdetails`, {
             method: 'POST',
@@ -254,16 +253,16 @@ export default function Academy() {
                 }
             });
             setLoading(false);
-            if(resp.data.status){
+            if (resp.data.status) {
                 let dataarray = resp.data.data.length
                 alert(`${dataarray} products found on amazon. Now you are redirecting to Check-product page`)
                 navigate('/ecom/check-product')
-            }else{
+            } else {
                 alert(resp.data.msg)
                 console.log(resp)
             }
         }
-       
+
     };
     const handleFileChange = (doc) => {
         setFile(doc);
@@ -330,7 +329,7 @@ export default function Academy() {
                     </div>
                 </div>
                 <div className="d-flex justify-content-center align-items-center">
-                    <h4 className='text-center ps-4 pe-4 pb-2 pt-2 headingtxt'>Academy Product Scrapping</h4>
+                    <h4 className='text-center ps-4 pe-4 pb-2 pt-2 headingtxt'>Walmart Product Scrapping</h4>
 
                 </div>
                 <div className="p-4 pt-1">
@@ -341,7 +340,7 @@ export default function Academy() {
                             <input type="text" onChange={(e) => setUrl(e.target.value)} placeholder='Brand URL' className='w-25 p-2' />
                             <input type="number" className='ms-3 p-2' onChange={(e) => setNum(e.target.value)} placeholder='Number of Pages' />
                             <input type="text" className='ms-3 p-2' onChange={(e) => setBrand(e.target.value)} placeholder='Brand Name' />
-                            <button className='ms-4 p-3 ps-4 pe-4 themebtn' onClick={fetchbrand} disabled={isbusy}>Fetch product URLs</button>
+                            <button className='ms-4 p-3 ps-4 pe-4 themebtn' onClick={fetchbrand} >Fetch product URLs</button>
                         </div>
                     </div>
 

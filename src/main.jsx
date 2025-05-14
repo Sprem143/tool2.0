@@ -25,7 +25,7 @@ import Boscovs from './ecomManagement/employee/Boscovs.jsx';
 import BabyName from './BabyName.jsx';
 import Academy from './ecomManagement/employee/Academy.jsx';
 import ExtractSKU from './orderManagement/mutual/ExtractSKU.jsx';
-
+import Walmart from './ecomManagement/employee/Walmart.jsx';
 
 createRoot(document.getElementById('root')).render(
    <BrowserRouter>
@@ -50,6 +50,7 @@ createRoot(document.getElementById('root')).render(
             <Route path='/ecom/belk-brand-scrapping' element={<Brandscrapping />} />
             <Route path='/ecom/boscovs-brand-scrapping' element={<Boscovs />} />
             <Route path='/ecom/academy-brand-scrapping' element={<Academy />} />
+            <Route path='/ecom/walmart-brand-scrapping' element={<Walmart />} />
 
             <Route path='/ecom/check-product' element={<CheckProduct />} />
             <Route path='/ecom/inventory-update' element={<Inventory />} />

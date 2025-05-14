@@ -433,160 +433,149 @@ export default function Employee2() {
                 )}
                 <Card cards={cards} />
 
+                <ul className='linklist'>
+                    <li>
+                        <Button onClick={() => setShowForm(!showForm)} className='themebtn'>
+                            {showForm ? <span className='linktext'>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="me-2 bi bi-arrows-collapse" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 8m7-8a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 4.293V.5A.5.5 0 0 1 8 0m-.5 11.707-1.146 1.147a.5.5 0 0 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 11.707V15.5a.5.5 0 0 1-1 0z" />
+                                </svg>
+                                Hide</span> :
+                                <div className='d-flex justify-content-center align-items-center'><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="me-2 bi bi-patch-plus-fill" viewBox="0 0 16 16">
+                                    <path d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01zM8.5 6v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 1 0" />
+                                </svg> <span className="linktext">Add Order</span>
+                                </div>}
+                        </Button>
+                    </li>
+                    <li>   <Button className='themebtn' onClick={startAuth}>
+                        <div className='d-flex align-items-center'>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="me-2 bi bi-table" viewBox="0 0 16 16">
+                                <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm15 2h-4v3h4zm0 4h-4v3h4zm0 4h-4v3h3a1 1 0 0 0 1-1zm-5 3v-3H6v3zm-5 0v-3H1v2a1 1 0 0 0 1 1zm-4-4h4V8H1zm0-4h4V4H1zm5-3v3h4V4zm4 4H6v3h4z" />
+                            </svg>
+                            <span className="linktext">Entry Sheet</span>
+                        </div>
+                    </Button>
+                    </li>
+                    <li>  <Button className='themebtn' onClick={startAuth}>
+                        <motion.div className='d-flex align-items-center'>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="me-2 bi bi-arrow-repeat" viewBox="0 0 16 16">
+                                <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41m-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9" />
+                                <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5 5 0 0 0 8 3M3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9z" />
+                            </svg>
+                            <span className="linktext">Sync Product</span>
+                        </motion.div>
+                    </Button>
+                    </li>
+                    <li>    <Button className='themebtn' onClick={setting}>
+                        <motion.div className='d-flex align-items-center'>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className=" bi bi-gear" viewBox="0 0 16 16">
+                                <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492M5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0" />
+                                <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115z" />
+                            </svg>
+                            <a href="#profile" className='ms-2' style={{ textDecoration: 'none' }}> <span className='linktext'>Profile Setting</span></a>
+                        </motion.div>
+                    </Button>
+                    </li>
+                    <li>
+                        <Dropdown className='themebtn' style={{ background: 'transparent', borderRadius:'28px', padding:'0 10px' }}>
+                            <Dropdown.Toggle style={{ background: 'transparent', border: 'none' }} >
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="me-2 bi bi-amazon" viewBox="0 0 16 16">
+                                    <path d="M10.813 11.968c.157.083.36.074.5-.05l.005.005a90 90 0 0 1 1.623-1.405c.173-.143.143-.372.006-.563l-.125-.17c-.345-.465-.673-.906-.673-1.791v-3.3l.001-.335c.008-1.265.014-2.421-.933-3.305C10.404.274 9.06 0 8.03 0 6.017 0 3.77.75 3.296 3.24c-.047.264.143.404.316.443l2.054.22c.19-.009.33-.196.366-.387.176-.857.896-1.271 1.703-1.271.435 0 .929.16 1.188.55.264.39.26.91.257 1.376v.432q-.3.033-.621.065c-1.113.114-2.397.246-3.36.67C3.873 5.91 2.94 7.08 2.94 8.798c0 2.2 1.387 3.298 3.168 3.298 1.506 0 2.328-.354 3.489-1.54l.167.246c.274.405.456.675 1.047 1.166ZM6.03 8.431C6.03 6.627 7.647 6.3 9.177 6.3v.57c.001.776.002 1.434-.396 2.133-.336.595-.87.961-1.465.961-.812 0-1.286-.619-1.286-1.533M.435 12.174c2.629 1.603 6.698 4.084 13.183.997.28-.116.475.078.199.431C13.538 13.96 11.312 16 7.57 16 3.832 16 .968 13.446.094 12.386c-.24-.275.036-.4.199-.299z" />
+                                    <path d="M13.828 11.943c.567-.07 1.468-.027 1.645.204.135.176-.004.966-.233 1.533-.23.563-.572.961-.762 1.115s-.333.094-.23-.137c.105-.23.684-1.663.455-1.963-.213-.278-1.177-.177-1.625-.13l-.09.009q-.142.013-.233.024c-.193.021-.245.027-.274-.032-.074-.209.779-.556 1.347-.623" />
+                                </svg> <span className="linktext">Brand Scrapping</span>
+                            </Dropdown.Toggle>
 
+                            <Dropdown.Menu>
+                                <Dropdown.Item href="/ecom/belk-brand-scrapping">Belk</Dropdown.Item>
+                                <Dropdown.Item href="/ecom/boscovs-brand-scrapping">Boscovs</Dropdown.Item>
+                                <Dropdown.Item href="/ecom/walmart-brand-scrapping">Walmart</Dropdown.Item>
+                                <Dropdown.Item href="/ecom/macy-brand-scrapping">Macy</Dropdown.Item>
+                                <Dropdown.Item href="/ecom/academy-brand-scrapping">Academy</Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </li>
 
-                <div className="container mt-4 pb-4">
-                    <div className="row">
-                        <div className="col-md-2 col-sm-6">
-                            <Button onClick={() => setShowForm(!showForm)} className='themebtn'>
-                                {showForm ? <span className='linktext'>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="me-2 bi bi-arrows-collapse" viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 8m7-8a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 4.293V.5A.5.5 0 0 1 8 0m-.5 11.707-1.146 1.147a.5.5 0 0 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 11.707V15.5a.5.5 0 0 1-1 0z" />
-                                    </svg>
-                                    Hide</span> :
-                                    <div className='d-flex justify-content-center align-items-center'><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="me-2 bi bi-patch-plus-fill" viewBox="0 0 16 16">
-                                        <path d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01zM8.5 6v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 1 0" />
-                                    </svg> <span className="linktext">Add Order</span>
-                                    </div>}
-                            </Button>
-                        </div>
-                        <div className="col-md-2 col-sm-6">
-                            <Button className='themebtn' onClick={startAuth}>
-                                <div className='d-flex align-items-center'>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="me-2 bi bi-table" viewBox="0 0 16 16">
-                                        <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm15 2h-4v3h4zm0 4h-4v3h4zm0 4h-4v3h3a1 1 0 0 0 1-1zm-5 3v-3H6v3zm-5 0v-3H1v2a1 1 0 0 0 1 1zm-4-4h4V8H1zm0-4h4V4H1zm5-3v3h4V4zm4 4H6v3h4z" />
-                                    </svg>
-                                    <span className="linktext">Entry Sheet</span>
-                                </div>
-                            </Button>
-                        </div>
-                        <div className="col-md-2 col-sm-6">
-                            <Button className='themebtn' onClick={startAuth}>
-                                <motion.div className='d-flex align-items-center'>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="me-2 bi bi-arrow-repeat" viewBox="0 0 16 16">
-                                        <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41m-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9" />
-                                        <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5 5 0 0 0 8 3M3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9z" />
-                                    </svg>
-                                    <span className="linktext">Sync Product</span>
-                                </motion.div>
-                            </Button>
-                        </div>
-                        <div className="col-md-2 col-sm-6">
-                            <Button className='themebtn' onClick={setting}>
-                                <motion.div className='d-flex align-items-center'>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className=" bi bi-gear" viewBox="0 0 16 16">
-                                        <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492M5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0" />
-                                        <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115z" />
-                                    </svg>
-                                    <a href="#profile" className='ms-2' style={{ textDecoration: 'none' }}> <span className='linktext'>Profile Setting</span></a>
-                                </motion.div>
-                            </Button>
-                        </div>
-                        <div className="col-md-2 col-sm-6">
-                            {/* <Button className='themebtn'> */}
-                            <motion.div className='d-flex align-items-center themebtn m-0' style={{ borderRadius: '28px' }}>
-                                <Dropdown style={{ background: 'transparent' }}>
-                                    <Dropdown.Toggle style={{ background: 'transparent', border: 'none' }} >
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="me-2 bi bi-amazon" viewBox="0 0 16 16">
-                                            <path d="M10.813 11.968c.157.083.36.074.5-.05l.005.005a90 90 0 0 1 1.623-1.405c.173-.143.143-.372.006-.563l-.125-.17c-.345-.465-.673-.906-.673-1.791v-3.3l.001-.335c.008-1.265.014-2.421-.933-3.305C10.404.274 9.06 0 8.03 0 6.017 0 3.77.75 3.296 3.24c-.047.264.143.404.316.443l2.054.22c.19-.009.33-.196.366-.387.176-.857.896-1.271 1.703-1.271.435 0 .929.16 1.188.55.264.39.26.91.257 1.376v.432q-.3.033-.621.065c-1.113.114-2.397.246-3.36.67C3.873 5.91 2.94 7.08 2.94 8.798c0 2.2 1.387 3.298 3.168 3.298 1.506 0 2.328-.354 3.489-1.54l.167.246c.274.405.456.675 1.047 1.166ZM6.03 8.431C6.03 6.627 7.647 6.3 9.177 6.3v.57c.001.776.002 1.434-.396 2.133-.336.595-.87.961-1.465.961-.812 0-1.286-.619-1.286-1.533M.435 12.174c2.629 1.603 6.698 4.084 13.183.997.28-.116.475.078.199.431C13.538 13.96 11.312 16 7.57 16 3.832 16 .968 13.446.094 12.386c-.24-.275.036-.4.199-.299z" />
-                                            <path d="M13.828 11.943c.567-.07 1.468-.027 1.645.204.135.176-.004.966-.233 1.533-.23.563-.572.961-.762 1.115s-.333.094-.23-.137c.105-.23.684-1.663.455-1.963-.213-.278-1.177-.177-1.625-.13l-.09.009q-.142.013-.233.024c-.193.021-.245.027-.274-.032-.074-.209.779-.556 1.347-.623" />
-                                        </svg> <span className="linktext">Brand Scrapping</span>
-                                    </Dropdown.Toggle>
-
-                                    <Dropdown.Menu>
-                                        <Dropdown.Item href="/ecom/belk-brand-scrapping">Belk</Dropdown.Item>
-                                        <Dropdown.Item href="/ecom/boscovs-brand-scrapping">Boscovs</Dropdown.Item>
-                                    </Dropdown.Menu>
-                                </Dropdown>
+                    <li>
+                        <Button className='themebtn'>
+                            <motion.div className='d-flex align-items-center'>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="me-2 bi bi-card-list" viewBox="0 0 16 16">
+                                    <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2z" />
+                                    <path d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8m0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-1-5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0M4 8a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0m0 2.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0" />
+                                </svg>
+                                <Link to='/extract-sku'> <span className="linktext">Extract SKU</span></Link>
                             </motion.div>
-                            {/* </Button> */}
-                        </div>
-
-                        <div className="col-md-2 col-sm-6">
-                            <Button className='themebtn'>
-                                <motion.div className='d-flex align-items-center'>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="me-2 bi bi-card-list" viewBox="0 0 16 16">
-                                        <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2z" />
-                                        <path d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8m0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-1-5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0M4 8a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0m0 2.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0" />
-                                    </svg>
-                                    <Link to='/extract-sku'> <span className="linktext">Extract SKU</span></Link>
-                                </motion.div>
-                            </Button>
-                        </div>
-                    </div>
-
-                    {showForm && (
-                        <div className="mt-3 cardboard" id="form_container" style={{ transition: '1s' }}>
-                            {groupedFields.map((group, index) => (
-                                <motion.div
-                                    key={index}
-                                    initial={{ opacity: 0, y: -70, x: -20 }}
-                                    animate={{ opacity: 1, y: 0, x: 0 }}
-                                    transition={{ duration: 0.5, delay: index * 0.2 }}
-                                    className="bg-gray-800 text-white p-6 rounded-2xl shadow-lg row d-flex flex-wrap"
-                                >
-                                    {group.map((field) => (
-                                        <div key={field.id} className="col-lg-4 col-md-6 col-sm-12">
-                                            <div className="form-group">
-                                                <label htmlFor={field.id}>{field.label}</label>
-                                                {field.type === "textarea" ? (
-                                                    <textarea
-                                                        id={field.id}
-                                                        name={field.id}
-                                                        style={{ background: 'transparent', color: 'white' }}
-                                                        rows="1"
-                                                        onChange={(e) =>
-                                                            setOrder({ ...order, [field.label]: e.target.value })
-                                                        }
-                                                        value={order[field.label] || ""}
-                                                    ></textarea>
-                                                ) : (
-                                                    <input
-                                                        type={field.type}
-                                                        id={field.id}
-                                                        name={field.id}
-                                                        disabled={editid && !field.editable ? true : false}
-                                                        style={{ background: '#ffffff26', color: 'white' }}
-                                                        onChange={(e) =>
-                                                            setOrder({ ...order, [field.label]: e.target.value })
-                                                        }
-                                                        value={order[field.label] || ""}
-                                                        required
-                                                    />
-                                                )}
-                                            </div>
+                        </Button>
+                    </li>
+                </ul>
+                {showForm && (
+                    <div className="mt-3 cardboard" id="form_container" style={{ transition: '1s' }}>
+                        {groupedFields.map((group, index) => (
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0, y: -70, x: -20 }}
+                                animate={{ opacity: 1, y: 0, x: 0 }}
+                                transition={{ duration: 0.5, delay: index * 0.2 }}
+                                className="bg-gray-800 text-white p-6 rounded-2xl shadow-lg row d-flex flex-wrap"
+                            >
+                                {group.map((field) => (
+                                    <div key={field.id} className="col-lg-4 col-md-6 col-sm-12">
+                                        <div className="form-group">
+                                            <label htmlFor={field.id}>{field.label}</label>
+                                            {field.type === "textarea" ? (
+                                                <textarea
+                                                    id={field.id}
+                                                    name={field.id}
+                                                    style={{ background: 'transparent', color: 'white' }}
+                                                    rows="1"
+                                                    onChange={(e) =>
+                                                        setOrder({ ...order, [field.label]: e.target.value })
+                                                    }
+                                                    value={order[field.label] || ""}
+                                                ></textarea>
+                                            ) : (
+                                                <input
+                                                    type={field.type}
+                                                    id={field.id}
+                                                    name={field.id}
+                                                    disabled={editid && !field.editable ? true : false}
+                                                    style={{ background: '#ffffff26', color: 'white' }}
+                                                    onChange={(e) =>
+                                                        setOrder({ ...order, [field.label]: e.target.value })
+                                                    }
+                                                    value={order[field.label] || ""}
+                                                    required
+                                                />
+                                            )}
                                         </div>
-                                    ))}
-                                </motion.div>
-                            ))}
-                            <div className="container">
-                                <div className="row">
-                                    <div className="col-md-5 col-sm-6 d-flex align-items-center">
-                                        <h5 className="text-align-start me-4">Upload label - </h5>
-                                        <input type="file" accept=".pdf" onChange={handleFileChange} />
                                     </div>
-                                    <div className="col-md-3 col-sm-6 d-flex align-items-center">
-                                        <Button variant="primary" className="mt-4 btn w-100" onClick={getpdflink}>
-                                            {!pdflink ? 'Upload' : <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-check-all" viewBox="0 0 16 16">
-                                                <path d="M8.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L2.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093L8.95 4.992zm-.92 5.14.92.92a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 1 0-1.091-1.028L9.477 9.417l-.485-.486z" />
-                                            </svg>}
-                                        </Button>
-                                        {pdflink && <a href={pdflink} className='text-white mt-4 ms-2' target='_blank'>View</a>}
-                                    </div>
-                                    <div className="col-md-2 col-sm-6">
-                                        <Button className="mt-4 btn btn-primary w-100" onClick={addproduct}>Submit</Button>
+                                ))}
+                            </motion.div>
+                        ))}
+                        <div className="container">
+                            <div className="row">
+                                <div className="col-md-5 col-sm-6 d-flex align-items-center">
+                                    <h5 className="text-align-start me-4">Upload label - </h5>
+                                    <input type="file" accept=".pdf" onChange={handleFileChange} />
+                                </div>
+                                <div className="col-md-3 col-sm-6 d-flex align-items-center">
+                                    <Button variant="primary" className="mt-4 btn w-100" onClick={getpdflink}>
+                                        {!pdflink ? 'Upload' : <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-check-all" viewBox="0 0 16 16">
+                                            <path d="M8.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L2.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093L8.95 4.992zm-.92 5.14.92.92a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 1 0-1.091-1.028L9.477 9.417l-.485-.486z" />
+                                        </svg>}
+                                    </Button>
+                                    {pdflink && <a href={pdflink} className='text-white mt-4 ms-2' target='_blank'>View</a>}
+                                </div>
+                                <div className="col-md-2 col-sm-6">
+                                    <Button className="mt-4 btn btn-primary w-100" onClick={addproduct}>Submit</Button>
 
-                                    </div>
-                                    <div className="col-md-2 col-sm-6">
-                                        <Button className="mt-4 btn btn-secondary w-100" onClick={reset}>Reset</Button>
-                                    </div>
+                                </div>
+                                <div className="col-md-2 col-sm-6">
+                                    <Button className="mt-4 btn btn-secondary w-100" onClick={reset}>Reset</Button>
                                 </div>
                             </div>
                         </div>
-                    )}
-
-                </div>
-
+                    </div>
+                )}
                 {profile.account && showprofile &&
                     <div id="profile" className='mt-4'>
                         <button className='closebtn bg-danger' onClick={() => setShowprofile(false)}>

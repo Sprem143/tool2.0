@@ -127,6 +127,14 @@ Table {
   margin-bottom: 20px;
 }
 
+.linklist{
+  display: inline-flex;
+  list-style: none !important;
+  li{
+    margin: 7px;
+  }
+}
+
 .nobackgr {
   background-color: transparent !important;
   border: none !important;
