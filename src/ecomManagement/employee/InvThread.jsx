@@ -17,8 +17,8 @@ export default function InvThread({ state }) {
     useEffect(() => {
        let user = JSON.parse(localStorage.getItem('user'))
        console.log(user)
-        // state?.account ? setAccount(state.account) : setAccount(JSON.parse(localStorage.getItem('user')).account)
-        // divideArrayIntoParts(state.url, state.thread)
+        state?.account ? setAccount(state.account) : setAccount(JSON.parse(localStorage.getItem('user')).account)
+        divideArrayIntoParts(state.url, state.thread)
     }, [])
 
     const [link, setLinks] = useState([])

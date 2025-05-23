@@ -6,6 +6,7 @@ import { useUser } from "./userContext";
 
 import E_login from "./ecomManagement/E_login";
 import O_login from "./orderManagement/employee/O_login";
+import Header from "./Header";
 
 export default function App() {
     const {setUser} = useUser()
@@ -34,7 +35,11 @@ export default function App() {
     }
 }
   return (
-      <div style={{ alignContent: 'center', minHeight:'100vh'}}>
+
+    <>
+ <div style={{ alignContent: 'center', minHeight:'100vh'}}>
+    <Header/>
+
          <motion.h1
                 className="shinetxt text-white text-center font-weight-bold"
                     initial={{ opacity: 0, scale: 0 }}
@@ -81,5 +86,7 @@ export default function App() {
 
       {page == 'o_login'? <O_login/>: page == 'e_login'? <E_login/> : null}
       </div>
+    </>
+     
   );
 }

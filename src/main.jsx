@@ -26,13 +26,13 @@ import BabyName from './BabyName.jsx';
 import Academy from './ecomManagement/employee/Academy.jsx';
 import ExtractSKU from './orderManagement/mutual/ExtractSKU.jsx';
 import Walmart from './ecomManagement/employee/Walmart.jsx';
+import PDFRotator from './ecomManagement/PDFRotator.jsx';
 
 createRoot(document.getElementById('root')).render(
    <BrowserRouter>
       <UserProvider>
-         <Header/>
+         <Header />
          <Routes>
-
             <Route path='/om/employee' element={<Employee2 />} />
             <Route path='/google-sheet' element={<Sheet />} />
             <Route path='/' element={<App />} />
@@ -46,16 +46,15 @@ createRoot(document.getElementById('root')).render(
             <Route path='/om/date-wise' element={<Datewise />} />
             {/* <Route path='/sheet' element={<Sheet/>}/> */}
             <Route path='/oauth-success' element={<OAuthSuccess />} />
-
             <Route path='/ecom/belk-brand-scrapping' element={<Brandscrapping />} />
             <Route path='/ecom/boscovs-brand-scrapping' element={<Boscovs />} />
             <Route path='/ecom/academy-brand-scrapping' element={<Academy />} />
             <Route path='/ecom/walmart-brand-scrapping' element={<Walmart />} />
-
             <Route path='/ecom/check-product' element={<CheckProduct />} />
             <Route path='/ecom/inventory-update' element={<Inventory />} />
             <Route path='/baby' element={<BabyName />} />
             <Route path='/extract-sku' element={<ExtractSKU />} />
+            <Route path='/pdf-rotator' element={<PDFRotator />} />
          </Routes>
       </UserProvider>
    </BrowserRouter>

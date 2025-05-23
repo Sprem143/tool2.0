@@ -15,6 +15,8 @@ const Threads = lazy(() => import('./Threads'))
 const Urllist = lazy(() => import('./Urllist'))
 import { motion } from "motion/react"
 import ClockLoader from "react-spinners/ClockLoader";
+import Modal from 'react-bootstrap/Modal';
+import { h1 } from 'motion/react-client';
 
 
 export default function Walmart() {
@@ -42,7 +44,7 @@ export default function Walmart() {
     useEffect(() => {
         let user = JSON.parse(localStorage.getItem('user'))
         setProfile(user)
-         getupdatedproduct(user.account)
+        getupdatedproduct(user.account)
     }, [])
 
 
@@ -55,7 +57,11 @@ export default function Walmart() {
     const [msg, setMsg] = useState('Please wait')
     const [thread, setThread] = useState(10)
     const [currentstatus, setCurrentstatus] = useState(null)
-
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+    const [html, setHtml] = useState('')
+    const [scrappingbrand, setScrappingbrand] = useState('')
 
     const [isbusy, setBusy] = useState(false)
     const checkifbusy = async () => {
@@ -75,7 +81,7 @@ export default function Walmart() {
                 let res = await fetch(`${api}/scrap/walmart/currentdetails`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ account:account })
+                    body: JSON.stringify({ account: account })
                 })
                 res = await res.json();
                 console.log(res)
@@ -90,20 +96,7 @@ export default function Walmart() {
         }
     }
 
-    function checkbrandname(url, wordsArray) {
-        wordsArray = wordsArray.split(' ').filter(Boolean)
-        url = url?.toLowerCase()
-        if (url.includes('%20') && wordsArray.length == 1) {
-            alert('Incorrect Brand Name');
-            return false
-        }
-        for (let word of wordsArray) {
-            if (!url.includes(word)) {
-                return false;
-            }
-        }
-        return true;
-    }
+
     const [refresh, setRefresh] = useState(false)
     const fetchbrand = async () => {
         if (!url || typeof url !== 'string' || !url.startsWith('https')) {
@@ -114,43 +107,69 @@ export default function Walmart() {
         if (resp) {
             if (num > 0) {
                 setRefresh(true)
-                let brandname = brand.toLowerCase();
-                let ans = checkbrandname(url, brandname)
-                if (ans) {
-                    let account = profile.account
-                    setLoading(true)
-                    let result = await fetch(`${api}/scrap/walmart/fetchurl`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ url, num, brandname, account })
-                    })
-                    result = await result.json();
-                    setLoading(false)
-                    setRefresh(false)
 
-                    if (result.status == 'exist') {
-                        alert(`This brand is already scrapped by ${result.data?.name} on date ${result.data?.Date}. There are total ${result.data?.urls} products url found in that scrapping searched url was - ${result.data?.brandurl} .  You can't scrap this brand again. `)
-                    }
-                    else if (result.status) {
-                        setLink(result.data);
-                        setCurrentstatus(prev => ({ ...prev, producturl: result?.data.length }))
-                    } else if (result.status == false) {
-                        alert(result.msg)
-                    }
-                } else {
-                    alert('Please enter correct brand name');
-                    setLoading(false)
+                let account = profile.account
+                setLoading(true)
+                let result = await fetch(`${api}/scrap/walmart/fetchurl`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ url, num, account })
+                })
+                result = await result.json();
+                setLoading(false)
+                setRefresh(false)
+
+                if (result.status == 'exist') {
+                    alert(`This brand is already scrapped by ${result.data?.name} on date ${result.data?.Date}. There are total ${result.data?.urls} products url found in that scrapping.  You can't scrap this brand again. `)
                 }
+                else if (result.status) {
+                    setLink(result.data);
+                    result.brand ? setScrappingbrand(result?.brand) : null
+                    setCurrentstatus(prev => ({ ...prev, producturl: result?.data }))
+                    result.brand ? setScrappingbrand(result.brand) : null
+                } else if (result.status == false) {
+                    alert(result.msg)
+                }
+
             } else {
-                alert("Please enter number of products on vender website");
+                alert("Please enter number of pages on vender website");
                 setLoading(false)
             }
+        }
+    }
+    // ---------fetch product link from html
+    const fetchurl2 = async () => {
+        let res = await fetch(`${api}/scrap/walmart/fetchurl2`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ html: html, profile: profile })
+        })
+        res = await res.json();
+        console.log(res)
+        if (res.status == '404' || res.status == '500') {
+            alert(res.msg)
+            return
+        }
+        if (res.status == 'exist') {
+            alert(`This brand is already scrapped by ${res.data.name} on data - ${res.data.Date}`)
+            return;
+        }
+        else if (res.status) {
+            setCurrentstatus(prev => ({ ...prev, producturl: res.data.length, fetchedproduct: 0 }))
+            setLink(res.data)
+            if(res.msg){
+                alert(res.msg)
+            }
+            res.brand ? setScrappingbrand(res.brand) : null
+            setHtml('')
+        } else {
+            console.log(res.msg)
         }
     }
     // --------refresh details while fetcing url-------
 
     async function refreshdetails() {
-        let res = await fetch(`${api}/scrap/academy/refreshdetails`, {
+        let res = await fetch(`${api}/scrap/walmart/refreshdetails`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ account: profile.account })
@@ -179,7 +198,7 @@ export default function Walmart() {
     }
 
     const downloadProductExcel = async () => {
-        let res = await fetch(`${api}/scrap/academy/downloadProductExcel`, {
+        let res = await fetch(`${api}/scrap/walmart/downloadProductExcel`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ account: profile.account })
@@ -187,7 +206,8 @@ export default function Walmart() {
         res = await res.json();
         if (res.status && Array.isArray(res.data) && res.data.length > 0) {
             res.count > 0 ? alert(`${res.count} already listed so these products will be deleted from sheet`) : null
-            let products = res.data.filter((d) => d.quantity > 2)
+            let products = res.data.filter((d) => d.quantity > 1)
+            // let products = res.data
             let jsondata = products.map((d) => {
                 return {
                     'UPC': 'UPC' + d.upc,
@@ -201,6 +221,7 @@ export default function Walmart() {
                     'Quantity': d.quantity,
                     'Belk link': d.url,
                     'Image link': d.imgurl,
+                    'product url': d.url,
                     'ASIN': '',
                     'Title': ''
                 }
@@ -247,7 +268,7 @@ export default function Walmart() {
             const formData = new FormData();
             formData.append('file', file);
             formData.append('account', profile.account);
-            var resp = await axios.post(`${api}/scrap/academy/uploadforcheck`, formData, {
+            var resp = await axios.post(`${api}/scrap/belk/uploadforcheck`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -269,6 +290,21 @@ export default function Walmart() {
         uploadamzsheet(doc)
     };
 
+    async function deleteoldurls() {
+        let ans = confirm('Are you sure, want to delete all previous urls')
+        if (ans) {
+            let res = await fetch(`${api}/scrap/walmart/deleteoldurls`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ account: profile.account })
+            })
+            res = await res.json()
+            if (res.status) {
+                setCurrentstatus({ fetchedproduct: 0, fetchurl: 0 })
+            }
+        }
+    }
+
     return (
 
         <>
@@ -283,6 +319,25 @@ export default function Walmart() {
                     </div>
                 </div>
             )}
+
+            <Modal show={show} onHide={handleClose} >
+                <Modal.Header closeButton>
+                    <Modal.Title>Copy and Paste Source Code here</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <textarea name="htmlcode" id="htmlcode" cols={50} rows={10} placeholder='paste source code here' onChange={(e) => setHtml(e.target.value)} >
+
+                    </textarea>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Close
+                    </Button>
+                    <Button variant="primary" onClick={() => { handleClose(), fetchurl2() }}>
+                        Save Changes
+                    </Button>
+                </Modal.Footer>
+            </Modal>
 
             <div className="container ps-4 pe-4" style={{ opacity: loading ? 0.1 : 1, color: loading ? 'black' : null, zIndex: '10000', width: '100vw', minHeight: '100vh' }}>
 
@@ -334,7 +389,7 @@ export default function Walmart() {
                 </div>
                 <div className="p-4 pt-1">
 
-                    <div className='d-flex flex-column justify-content-center align-items-center w-100'>
+                    {/* <div className='d-flex flex-column justify-content-center align-items-center w-100'>
 
                         <div className='w-100 d-flex justify-content-center'>
                             <input type="text" onChange={(e) => setUrl(e.target.value)} placeholder='Brand URL' className='w-25 p-2' />
@@ -342,12 +397,38 @@ export default function Walmart() {
                             <input type="text" className='ms-3 p-2' onChange={(e) => setBrand(e.target.value)} placeholder='Brand Name' />
                             <button className='ms-4 p-3 ps-4 pe-4 themebtn' onClick={fetchbrand} >Fetch product URLs</button>
                         </div>
-                    </div>
+                    </div> */}
 
+                    {/* -------html */}
+                    <h3 >Get Product Url</h3>
+                    <div className="container-fluid mb-4">
+                        <div className="row border border-secondary p-3">
+                            <div className="col-md-7 col-sm-12" style={{ borderRight: '1px solid gray' }}>
+                                <h5 className='text-center'>By Brand URL</h5>
+                                <div className='w-100 d-flex justify-content-center'>
+                                    <input type="text" onChange={(e) => setUrl(e.target.value)} placeholder='Brand URL' className='p-2' />
+                                    <input type="number" className='ms-3 p-2' onChange={(e) => setNum(e.target.value)} placeholder='Number of pages' />
+                                    <button className='ms-4 p-3 ps-4 pe-4 themebtn' onClick={fetchbrand} disabled={isbusy}>Fetch urls</button>
+                                </div>
+                            </div>
+                            <div className="col-md-1 col-sm-12" style={{ borderRight: '1px solid gray', display: 'grid', placeItems: 'center' }}>
+                                <h1>OR</h1>
+                            </div>
+                            <div className="col-md-4 col-sm-12">
+                                <h5 className='text-center'>By HTML ( Recommended )</h5>
+                                <div className="d-flex justify-content-center align-items-center">
+                                    <button className="themebtn" onClick={handleShow}>Add html</button>
+                                    <button className="themebtn " style={{backgroundColor:'red'}} onClick={deleteoldurls}>Clear old Data</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {scrappingbrand && <h1 className='text-center'>Scrapping Brand - {scrappingbrand}</h1>}
                     {currentstatus &&
                         <div className="container w-100 d-flex justify-content-center align-items-center">
-                            <button className='m-2' onClick={() => handleshow('url')}> <a href="#urllist" className='text-dark'>Total product url - {currentstatus?.producturl}</a> </button>
-                            <button className='m-2' onClick={getupdatedproduct}> <div className="timer" >
+                            <button className='m-2' onClick={() => handleshow('url')}> <a href="#urllist" className=''>Total product url - {currentstatus.producturl}</a> </button>
+                            <button className='m-2' onClick={()=>getupdatedproduct(profile.account)}> <div className="timer" >
                                 Total fetched Product : {currentstatus?.fetchedproduct} <span ><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="ms-4 bi bi-arrow-clockwise" viewBox="0 0 16 16">
                                     <path fillRule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z" />
                                     <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466" />
@@ -401,7 +482,7 @@ export default function Walmart() {
                                 </svg>
                             </button>
                             <Suspense fallback={<div>Loading...</div>}>
-                                <Threads state={{ urls: link, thread: thread, account: profile.account }} />
+                                <Threads key={thread} state={{ urls: link, thread: thread, account: profile.account }} />
                             </Suspense>
                         </div>
                     }

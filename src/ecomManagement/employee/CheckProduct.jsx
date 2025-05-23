@@ -115,7 +115,7 @@ export default function CheckProduct() {
         setLoading(false)
         if (res.status) {
             setRealData(res.data);
-            let unchecked = res.data.filter((d) => !d.isCheked)
+            let unchecked = res.data.filter((d) => d['Available Quantity']>4)
             setUnCheck(unchecked)
             setData(unchecked);
             setCheck(res.data.length - unchecked.length);
@@ -177,7 +177,7 @@ export default function CheckProduct() {
             return {
                 'Date': new Date().toDateString().slice(4).replaceAll(" ", '-'),
                 'SKU': d.SKU,
-                'Vendor': 'BELK',
+                'Vendor': d['Belk link'].includes('walmart')? 'Walmart':d['Belk link'].includes('belk')?'Belk':d['Belk link'].includes('boscovs')?'Boscovs': '',
                 'SKU length': d.SKU.length,
                 'Amz Title': d.Title,
                 'Belk link': d['Belk link'],
