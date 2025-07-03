@@ -10,7 +10,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 export default function Entrysheet({ state }) {
 
     const local = 'http://localhost:9000'
-    const api = 'https://brand-b-1.onrender.com'
+    const api = 'https://gstar-backend2-0.onrender.com'
     const [loading, setLoading] = useState(false);
     const [msg, setMsg] = useState('Please Wait');
     const [profile, setProfile] = useState({})

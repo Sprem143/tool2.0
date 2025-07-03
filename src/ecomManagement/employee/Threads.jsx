@@ -17,7 +17,7 @@ export default function Threads({ state }) {
 
 
     const local = 'http://localhost:9000'
-    const api = 'https://brand-b-1.onrender.com'
+    const api = 'https://gstar-backend2-0.onrender.com'
 
     const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
     const [account, setAccount] = useState('')

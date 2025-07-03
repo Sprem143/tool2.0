@@ -6,7 +6,7 @@ import ClockLoader from "react-spinners/ClockLoader";
 function PDFRotator() {
 
     const local = 'http://localhost:9000'
-    const api = 'https://brand-b-1.onrender.com'
+    const api = 'https://gstar-backend2-0.onrender.com'
 
     const [files, setFiles] = useState([]);
     const [msg, setMsg] = useState('Please Wait...')

@@ -6,7 +6,7 @@ import '../App.scss'
 export default function Label() {
 
   const local = 'http://localhost:9000'
-  const api = 'https://brand-b-1.onrender.com'
+  const api = 'https://gstar-backend2-0.onrender.com'
   const [loading, setLoading] = useState(false);
 
   const [data, setData] = useState([]);

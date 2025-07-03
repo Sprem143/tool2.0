@@ -10,7 +10,7 @@ import ClockLoader from "react-spinners/ClockLoader";
 export default function OsEmpSignup() {
 
     const local = 'http://localhost:9000'
-    const api = 'https://brand-b-1.onrender.com'
+    const api = 'https://gstar-backend2-0.onrender.com'
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({

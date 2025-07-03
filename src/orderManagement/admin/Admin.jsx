@@ -22,7 +22,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Admin() {
     const local = 'http://localhost:9000'
-    const api = 'https://brand-b-1.onrender.com'
+    const api = 'https://gstar-backend2-0.onrender.com'
     const navigate = useNavigate();
     const [profile, setProfile] = useState({})
     const [islogin, setIslogin] = useState(false)

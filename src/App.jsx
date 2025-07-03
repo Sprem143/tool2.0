@@ -11,7 +11,7 @@ import Header from "./Header";
 export default function App() {
     const {setUser} = useUser()
     const local = 'http://localhost:9000'
-    const api = 'https://brand-b-1.onrender.com'
+    const api = 'https://gstar-backend2-0.onrender.com'
     const navigate = useNavigate()
   const [page, setPage]= useState('')
  useEffect(()=>{

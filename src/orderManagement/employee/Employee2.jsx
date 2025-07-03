@@ -28,7 +28,7 @@ export default function Employee2() {
     const { user } = useUser()
     const { setUser } = useUser()
     const local = 'http://localhost:9000'
-    const api = 'https://brand-b-1.onrender.com'
+    const api = 'https://gstar-backend2-0.onrender.com'
     const navigate = useNavigate();
 
     const [profile, setProfile] = useState({})
