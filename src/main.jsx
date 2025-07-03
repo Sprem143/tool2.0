@@ -26,7 +26,9 @@ import BabyName from './BabyName.jsx';
 import Academy from './ecomManagement/employee/Academy.jsx';
 import ExtractSKU from './orderManagement/mutual/ExtractSKU.jsx';
 import Walmart from './ecomManagement/employee/Walmart.jsx';
+import Macy from './ecomManagement/employee/Macy.jsx';
 import PDFRotator from './ecomManagement/PDFRotator.jsx';
+import Label from './ecomManagement/Label.jsx';
 
 createRoot(document.getElementById('root')).render(
    <BrowserRouter>
@@ -50,11 +52,13 @@ createRoot(document.getElementById('root')).render(
             <Route path='/ecom/boscovs-brand-scrapping' element={<Boscovs />} />
             <Route path='/ecom/academy-brand-scrapping' element={<Academy />} />
             <Route path='/ecom/walmart-brand-scrapping' element={<Walmart />} />
+            <Route path='/ecom/macy-brand-scrapping' element={<Macy />} />
             <Route path='/ecom/check-product' element={<CheckProduct />} />
             <Route path='/ecom/inventory-update' element={<Inventory />} />
             <Route path='/baby' element={<BabyName />} />
             <Route path='/extract-sku' element={<ExtractSKU />} />
             <Route path='/pdf-rotator' element={<PDFRotator />} />
+            <Route path='/label-generation' element={<Label />} />
          </Routes>
       </UserProvider>
    </BrowserRouter>

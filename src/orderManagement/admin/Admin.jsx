@@ -21,7 +21,7 @@ import Button from 'react-bootstrap/Button';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Admin() {
-    const local = 'http://localhost:10000'
+    const local = 'http://localhost:9000'
     const api = 'https://brand-b-1.onrender.com'
     const navigate = useNavigate();
     const [profile, setProfile] = useState({})

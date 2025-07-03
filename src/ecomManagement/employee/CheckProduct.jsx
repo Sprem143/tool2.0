@@ -94,7 +94,7 @@ export default function CheckProduct() {
         return range;
     };
 
-    const local = 'http://localhost:10000'
+    const local = 'http://localhost:9000'
     const api = 'https://brand-b-1.onrender.com'
 
 

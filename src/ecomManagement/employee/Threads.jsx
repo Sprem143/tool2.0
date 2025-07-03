@@ -16,7 +16,7 @@ import { motion } from "motion/react"
 export default function Threads({ state }) {
 
 
-    const local = 'http://localhost:10000'
+    const local = 'http://localhost:9000'
     const api = 'https://brand-b-1.onrender.com'
 
     const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));

@@ -24,22 +24,22 @@ function Header() {
   return (
     <>
 
-      {
-        profile &&
-        ['lg'].map((expand) => (
-          <Navbar key={expand} expand={expand} style={{ background: 'black', color: 'white' }} className="border text-white border-secondary border-start-0 border-end-0 ps-4" >
+      
+        
+        
+          <Navbar key="lg" expand="lg" style={{ background: 'black', color: 'white' }} className="border text-white border-secondary border-start-0 border-end-0 ps-4" >
             <Container fluid className='p-0'>
               <Navbar.Brand href="/" className='fs-3'><img src="/static/gstar.png" height={60} alt="logo" className='me-4' /><span className="text-white">Gstar Tool</span>
-
+<img src="/static/flying.gif" alt="" className='ms-4' style={{height:'50px', transform: 'scale(1.3)'}} />
               </Navbar.Brand>
-              <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
+              <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-lg`} />
               <Navbar.Offcanvas
-                id={`offcanvasNavbar-expand-${expand}`}
-                aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
+                id={`offcanvasNavbar-expand-lg`}
+                aria-labelledby={`offcanvasNavbarLabel-expand-lg`}
                 placement="end"
               >
                 <Offcanvas.Header closeButton>
-                  <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`} className='text-white'>
+                  <Offcanvas.Title id={`offcanvasNavbarLabel-expand-lg`} className='text-white'>
                     Gstar   </Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body>
@@ -69,13 +69,11 @@ function Header() {
                   </Nav>
 
                 </Offcanvas.Body>
-                <div className='gifimage' style={{ width: '200px', height: '65px', backgroundImage: `url("/static/flying.gif")` }}>
-                </div>
+                {/* <div style={{ width: '200px', height: '65px', backgroundImage: `url("/static/flying.gif")` }}> </div> */}
               </Navbar.Offcanvas>
             </Container>
           </Navbar>
-        ))}
-
+       
     </>
   );
 }

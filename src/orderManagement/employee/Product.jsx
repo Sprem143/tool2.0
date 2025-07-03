@@ -9,9 +9,10 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { Link } from "react-router-dom";
 import axios from "axios";
+import * as XLSX from 'xlsx';
 export default function Product() {
 
-    const local = 'http://localhost:10000'
+    const local = 'http://localhost:9000'
     const api = 'https://brand-b-1.onrender.com'
     const [loading, setLoading] = useState(false);
     const [msg, setMsg] = useState('Please Wait');
@@ -51,12 +52,12 @@ export default function Product() {
     }
 
     function handletable(user) {
-        let sheetlist = user.sheetlist || []
+        let sheetlist = user?.sheetlist || []
         let showtable = sheetlist.filter((s) => s.toLowerCase().includes('belk') || s.toLowerCase().includes('boscov'))
         setTables(showtable)
     }
     const startAuth = async () => {
-        const response = await fetch("http://localhost:10000/api/google/auth", {
+        const response = await fetch("http://localhost:9000/api/google/auth", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({

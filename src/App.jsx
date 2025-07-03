@@ -10,7 +10,7 @@ import Header from "./Header";
 
 export default function App() {
     const {setUser} = useUser()
-    const local = 'http://localhost:10000'
+    const local = 'http://localhost:9000'
     const api = 'https://brand-b-1.onrender.com'
     const navigate = useNavigate()
   const [page, setPage]= useState('')
@@ -38,7 +38,6 @@ export default function App() {
 
     <>
  <div style={{ alignContent: 'center', minHeight:'100vh'}}>
-    <Header/>
 
          <motion.h1
                 className="shinetxt text-white text-center font-weight-bold"

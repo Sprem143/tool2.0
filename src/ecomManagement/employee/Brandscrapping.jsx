@@ -19,7 +19,7 @@ import Modal from 'react-bootstrap/Modal';
 
 export default function Brandscrapping() {
 
-    const local = 'http://localhost:10000'
+    const local = 'http://localhost:9000'
     const api = 'https://brand-b-1.onrender.com'
 
     const navigate = useNavigate()
@@ -215,6 +215,14 @@ export default function Brandscrapping() {
                 }
             })
             jsondata = Array.from(jsondata.reduce((map, item) => map.set(item.UPC, item), new Map()).values());
+
+            let finalData = [];
+            for (let i = 0; i < jsondata.length; i++) {
+                finalData.push(jsondata[i]);
+                if ((i + 1) % 999 === 0) {
+                    finalData.push({});
+                }
+            }
             const wb = XLSX.utils.book_new()
             const ws = XLSX.utils.json_to_sheet(jsondata);
             XLSX.utils.book_append_sheet(wb, ws, 'Sheet1')
@@ -298,7 +306,7 @@ export default function Brandscrapping() {
     }
 
     async function deleteoldurls() {
-        let res = await fetch(`${api}/scrap/boscovs/deleteoldurls`, {
+        let res = await fetch(`${api}/scrap/belk/deleteoldurls`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ account: profile.account })
@@ -395,7 +403,7 @@ export default function Brandscrapping() {
                     <h3 >Get Product Url</h3>
                     <div className="container-fluid mb-4">
                         <div className="row border border-secondary p-3">
-                            <div className="col-md-9 col-sm-12" style={{borderRight:'1px solid gray'}}>
+                            <div className="col-md-9 col-sm-12" style={{ borderRight: '1px solid gray' }}>
                                 <h5 className='text-center'>By Brand URL</h5>
                                 <div className='w-100 d-flex justify-content-center'>
                                     <input type="text" onChange={(e) => setUrl(e.target.value)} placeholder='Brand URL' className='w-25 p-2' />
@@ -406,7 +414,7 @@ export default function Brandscrapping() {
                                 </div>
                             </div>
                             <div className="col-md-3 col-sm-12">
-                            <h5 className='text-center'>By HTML</h5>
+                                <h5 className='text-center'>By HTML</h5>
                                 <div className="d-flex justify-content-center align-items-center">
                                     <button className="themebtn" onClick={deleteoldurls}>Clear Previous Data</button>
                                     <button className="themebtn" onClick={handleShow}>Add html</button>
@@ -418,54 +426,54 @@ export default function Brandscrapping() {
 
 
 
-                    {currentstatus &&
-                        <div className="container w-100 d-flex justify-content-center align-items-center">
-                            <button className='m-2' onClick={() => handleshow('url')}> <a href="#urllist" className='text-dark'>Total product url - {currentstatus?.producturl}</a> </button>
-                            <button className='m-2' onClick={getupdatedproduct}> <div className="timer" >
-                                Total fetched Product : {currentstatus?.fetchedproduct} <span ><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="ms-4 bi bi-arrow-clockwise" viewBox="0 0 16 16">
-                                    <path fillRule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z" />
-                                    <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466" />
-                                </svg></span>
-                            </div></button>
+                    {/* {currentstatus && */}
+                    <div className="container w-100 d-flex justify-content-center align-items-center">
+                        <button className='m-2' onClick={() => handleshow('url')}> <a href="#urllist" className='text-dark'>Total product url - {currentstatus?.producturl}</a> </button>
+                        <button className='m-2' onClick={getupdatedproduct}> <div className="timer" >
+                            Total fetched Product : {currentstatus?.fetchedproduct} <span ><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="ms-4 bi bi-arrow-clockwise" viewBox="0 0 16 16">
+                                <path fillRule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z" />
+                                <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466" />
+                            </svg></span>
+                        </div></button>
 
-                            {link.length > 0 &&
-                                <>
-                                    <Dropdown>
-                                        <Dropdown.Toggle variant="" className='text-white border m-0 p-2' id="dropdown-basic">
-                                            Select Speed
-                                        </Dropdown.Toggle>
+                        {link.length > 0 &&
+                            <>
+                                <Dropdown>
+                                    <Dropdown.Toggle variant="" className='text-white border m-0 p-2' id="dropdown-basic">
+                                        Select Speed
+                                    </Dropdown.Toggle>
 
-                                        <Dropdown.Menu>
+                                    <Dropdown.Menu>
 
-                                            <Dropdown.Item onClick={() => setThread(6)}>6</Dropdown.Item>
-                                            <Dropdown.Item onClick={() => setThread(7)}>7</Dropdown.Item>
-                                            <Dropdown.Item onClick={() => setThread(8)}>8</Dropdown.Item>
-                                            <Dropdown.Item onClick={() => setThread(9)}>9</Dropdown.Item>
-                                            <Dropdown.Item onClick={() => setThread(10)}>10</Dropdown.Item>
-                                            <Dropdown.Item onClick={() => setThread(11)}>11</Dropdown.Item>
-                                            <Dropdown.Item onClick={() => setThread(12)}>12</Dropdown.Item>
-                                            <Dropdown.Item onClick={() => setThread(13)}>13</Dropdown.Item>
-                                            <Dropdown.Item onClick={() => setThread(14)}>14</Dropdown.Item>
-                                            <Dropdown.Item onClick={() => setThread(15)}>15</Dropdown.Item>
-                                            <Dropdown.Item onClick={() => setThread(16)}>16</Dropdown.Item>
-                                            <Dropdown.Item onClick={() => setThread(17)}>17</Dropdown.Item>
-                                            <Dropdown.Item onClick={() => setThread(18)}>18</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => setThread(6)}>6</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => setThread(7)}>7</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => setThread(8)}>8</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => setThread(9)}>9</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => setThread(10)}>10</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => setThread(11)}>11</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => setThread(12)}>12</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => setThread(13)}>13</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => setThread(14)}>14</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => setThread(15)}>15</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => setThread(16)}>16</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => setThread(17)}>17</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => setThread(18)}>18</Dropdown.Item>
 
-                                        </Dropdown.Menu>
-                                    </Dropdown>
-                                    <button className='m-2' onClick={scrapproduct} disabled={isbusy}>Start Scraping UPCs</button>
+                                    </Dropdown.Menu>
+                                </Dropdown>
+                                <button className='m-2' onClick={scrapproduct} disabled={isbusy}>Start Scraping UPCs</button>
 
-                                </>
-                            }
-                            {currentstatus?.fetchedproduct > 0 &&
-                                <>
-                                    <button className='ms-4 mt-4 mb-3' variant="secondary" onClick={downloadProductExcel}>
-                                        Download Products List
-                                    </button>
-                                    <input type="file" onChange={(e) => handleFileChange(e.target.files[0])} accept=".xlsx, .xls, .xlsm" />                                </>
-                            }
-                        </div>
-                    }
+                            </>
+                        }
+                        {/* {currentstatus?.fetchedproduct > 0 && */}
+                        <>
+                            <button className='ms-4 mt-4 mb-3' variant="secondary" onClick={downloadProductExcel}>
+                                Download Products List
+                            </button>
+                            <input type="file" onChange={(e) => handleFileChange(e.target.files[0])} accept=".xlsx, .xls, .xlsm" />                                </>
+                        {/* } */}
+                    </div>
+                    {/* } */}
 
                     {showthread &&
                         <div id="profile" className='mt-4'>

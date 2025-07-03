@@ -18,7 +18,7 @@ import ClockLoader from "react-spinners/ClockLoader";
 
 export default function Inventory() {
 
-    const local = 'http://localhost:10000'
+    const local = 'http://localhost:9000'
     const api = 'https://brand-b-1.onrender.com'
 
     const navigate = useNavigate()

@@ -16,7 +16,7 @@ const Product = lazy(() => import("../employee/Product"));
 export default function Sheet() {
     const { user } = useUser()
 
-    const local = 'http://localhost:10000'
+    const local = 'http://localhost:9000'
     const api = 'https://brand-b-1.onrender.com'
     const [loading, setLoading] = useState(false);
     const [msg, setMsg] = useState('Please Wait');
@@ -49,7 +49,7 @@ export default function Sheet() {
     }
 
     const startAuth = async (clientid, secretkey) => {
-        const response = await fetch("http://localhost:10000/api/google/auth", {
+        const response = await fetch("http://localhost:9000/api/google/auth", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({

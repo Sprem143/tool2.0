@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 export default function InvCard({ state }) {
 
     
-    const local = 'http://localhost:10000'
+    const local = 'http://localhost:9000'
     const api = 'https://brand-b-1.onrender.com'
     const [cards, setCards] = useState([])
 

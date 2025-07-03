@@ -4,7 +4,7 @@ import axios from "axios";
 function Sheet() {
   const [data, setData] = useState([]);
   const[token, setToken]=useState({})
-  const local = 'http://localhost:10000'
+  const local = 'http://localhost:9000'
     const api = 'https://brand-b-1.onrender.com'
   const fetchSheet = async () => {
     try {
@@ -20,11 +20,11 @@ function Sheet() {
       if(res.status){
         setData(res.data)
       }else{
-        window.location.href = "http://localhost:10000/api/google/auth";
+        window.location.href = "http://localhost:9000/api/google/auth";
       }
     } catch (err) {
       alert("Not authenticated. Redirecting...");
-      window.location.href = "http://localhost:10000/api/google/auth";
+      window.location.href = "http://localhost:9000/api/google/auth";
     }
   };
 

@@ -13,13 +13,11 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import React, { lazy, Suspense } from "react";
 const Threads = lazy(() => import('./Threads'))
 const Urllist = lazy(() => import('./Urllist'))
-import { motion } from "motion/react"
 import ClockLoader from "react-spinners/ClockLoader";
 import Modal from 'react-bootstrap/Modal';
-import { h1 } from 'motion/react-client';
 
 
-export default function Walmart() {
+export default function Macy() {
 
     const local = 'http://localhost:9000'
     const api = 'https://brand-b-1.onrender.com'
@@ -27,6 +25,10 @@ export default function Walmart() {
     const navigate = useNavigate()
     const [profile, setProfile] = useState(null);
     const [showthread, setShowthread] = useState(false)
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+    const [html, setHtml] = useState('')
 
     async function checklogin(token) {
         let res = await fetch(`${api}/om/employee/getprofile`, {
@@ -42,9 +44,8 @@ export default function Walmart() {
     }
 
     useEffect(() => {
-        let user = JSON.parse(localStorage.getItem('user'))
-        setProfile(user)
-        getupdatedproduct(user.account)
+        let token = localStorage.getItem('gstar_om_employee');
+        token ? checklogin(token) : navigate('/')
     }, [])
 
 
@@ -56,39 +57,36 @@ export default function Walmart() {
     const [brand, setBrand] = useState('')
     const [msg, setMsg] = useState('Please wait')
     const [thread, setThread] = useState(10)
-    const [currentstatus, setCurrentstatus] = useState(null)
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-    const [html, setHtml] = useState('')
-    const [scrappingbrand, setScrappingbrand] = useState('')
+
+    useEffect(() => {
+        // getproductslink();
+        getupdatedproduct();
+        // checkifbusy()
+    }, [profile]);
 
     const [isbusy, setBusy] = useState(false)
-    const checkifbusy = async () => {
-        let res = await fetch(`${api}/inv/checkifbusy`, {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' }
-        })
-        res = await res.json();
-        setBusy(res.status)
-    }
 
-
-    const getupdatedproduct = async (account) => {
+    const getupdatedproduct = async () => {
         try {
-            if (account) {
-                console.log(account)
-                let res = await fetch(`${api}/scrap/walmart/currentdetails`, {
+            if (profile?.account) {
+                let res = await fetch(`${api}/scrap/macy/currentdetails`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ account: account })
+                    body: JSON.stringify({ account: profile.account })
                 })
                 res = await res.json();
                 console.log(res)
-                if (res.status) {
-                    setCurrentstatus(prev => ({ ...prev, producturl: res.url, fetchedproduct: res.fetched }))
-                    setLink(res.link)
-                }
+                if (res.status == '404') {
+                    console.log(res.msg)
+                } else
+                    if (res.status) {
+                        setCurrentstatus(prev => ({ ...prev, producturl: res.url, fetchedproduct: res.fetched }))
+                       if(Array.isArray(res.link)){
+                        let modifiedlinks = res.link.map((l)=> 'https://www.macys.com/shop/product/?ID='+l)
+                         setLink(modifiedlinks)
+                       }
+                       
+                    }
             }
         } catch (err) {
             console.log(err);
@@ -96,8 +94,23 @@ export default function Walmart() {
         }
     }
 
+    function checkbrandname(url, wordsArray) {
+        wordsArray = wordsArray.split(' ').filter(Boolean)
+        url = url?.toLowerCase()
+        if (url.includes('%20') && wordsArray.length == 1) {
+            alert('Incorrect Brand Name');
+            return false
+        }
 
+        for (let word of wordsArray) {
+            if (!url.includes(word)) {
+                return false;
+            }
+        }
+        return true;
+    }
     const [refresh, setRefresh] = useState(false)
+    const [remainingpage, setRemainingpage] = useState([])
     const fetchbrand = async () => {
         if (!url || typeof url !== 'string' || !url.startsWith('https')) {
             alert('Invalid url');
@@ -107,69 +120,39 @@ export default function Walmart() {
         if (resp) {
             if (num > 0) {
                 setRefresh(true)
-
-                let account = profile.account
-                setLoading(true)
-                let result = await fetch(`${api}/scrap/walmart/fetchurl`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ url, num, account })
-                })
-                result = await result.json();
-                setLoading(false)
-                setRefresh(false)
-
-                if (result.status == 'exist') {
-                    alert(`This brand is already scrapped by ${result.data?.name} on date ${result.data?.Date}. There are total ${result.data?.urls} products url found in that scrapping.  You can't scrap this brand again. `)
+                let brandname = brand.toLowerCase();
+                let ans = checkbrandname(url, brandname)
+                if (ans) {
+                    setLoading(true)
+                    let result = await fetch(`${api}/scrap/macy/extracturls`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ url, num, brandname, profile })
+                    })
+                    result = await result.json();
+                    setLoading(false)
+                    if (result.status == 'exist') {
+                        alert(`This brand is already scrapped by ${result.data?.name} on date ${result.data?.Date}. There are total ${result.data?.urls} products url found in that scrapping searched url was - ${result.data?.brandurl} .  You can't scrap this brand again. `)
+                    }
+                    else if (result.status) {
+                        setLink(result.producturl);
+                        setCurrentstatus(prev => ({ ...prev, producturl: result?.producturl.length }))
+                        setRemainingpage(result.pageurl)
+                    }
+                } else {
+                    alert('Please enter correct brand name');
+                    setLoading(false)
                 }
-                else if (result.status) {
-                    setLink(result.data);
-                    result.brand ? setScrappingbrand(result?.brand) : null
-                    setCurrentstatus(prev => ({ ...prev, producturl: result?.data }))
-                    result.brand ? setScrappingbrand(result.brand) : null
-                } else if (result.status == false) {
-                    alert(result.msg)
-                }
-
             } else {
-                alert("Please enter number of pages on vender website");
+                alert("Please enter number of products on vender website");
                 setLoading(false)
             }
-        }
-    }
-    // ---------fetch product link from html
-    const fetchurl2 = async () => {
-        let res = await fetch(`${api}/scrap/walmart/fetchurl2`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ html: html, profile: profile })
-        })
-        res = await res.json();
-        console.log(res)
-        if (res.status == '404' || res.status == '500') {
-            alert(res.msg)
-            return
-        }
-        if (res.status == 'exist') {
-            alert(`This brand is already scrapped by ${res.data.name} on data - ${res.data.Date}`)
-            return;
-        }
-        else if (res.status) {
-            setCurrentstatus(prev => ({ ...prev, producturl: res.data.length, fetchedproduct: 0 }))
-            setLink(res.data)
-            if(res.msg){
-                alert(res.msg)
-            }
-            res.brand ? setScrappingbrand(res.brand) : null
-            setHtml('')
-        } else {
-            console.log(res.msg)
         }
     }
     // --------refresh details while fetcing url-------
-
+    const [currentstatus, setCurrentstatus] = useState(null)
     async function refreshdetails() {
-        let res = await fetch(`${api}/scrap/walmart/refreshdetails`, {
+        let res = await fetch(`${api}/scrap/belk/refreshdetails`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ account: profile.account })
@@ -198,7 +181,7 @@ export default function Walmart() {
     }
 
     const downloadProductExcel = async () => {
-        let res = await fetch(`${api}/scrap/walmart/downloadProductExcel`, {
+        let res = await fetch(`${api}/scrap/belk/downloadProductExcel`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ account: profile.account })
@@ -206,8 +189,7 @@ export default function Walmart() {
         res = await res.json();
         if (res.status && Array.isArray(res.data) && res.data.length > 0) {
             res.count > 0 ? alert(`${res.count} already listed so these products will be deleted from sheet`) : null
-            let products = res.data.filter((d) => d.quantity > 1)
-            // let products = res.data
+            let products = res.data.filter((d) => d.quantity > 2)
             let jsondata = products.map((d) => {
                 return {
                     'UPC': 'UPC' + d.upc,
@@ -221,7 +203,6 @@ export default function Walmart() {
                     'Quantity': d.quantity,
                     'Belk link': d.url,
                     'Image link': d.imgurl,
-                    'product url': d.url,
                     'ASIN': '',
                     'Title': ''
                 }
@@ -290,18 +271,34 @@ export default function Walmart() {
         uploadamzsheet(doc)
     };
 
+    const fetchurl = async () => {
+        let res = await fetch(`${api}/scrap/belk/fetchurl`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ html: html, profile: profile })
+        })
+        res = await res.json();
+        if (res.status == 'exist') {
+            alert(`This brand is already scrapped by ${res.data.name} on data - ${res.data.Date}`)
+        }
+        else if (res.status) {
+            setCurrentstatus(prev => ({ ...prev, producturl: res.url, fetchedproduct: res.fetched }))
+            setLink(res.link)
+            setHtml('')
+        } else {
+            console.log(res.msg)
+        }
+    }
+
     async function deleteoldurls() {
-        let ans = confirm('Are you sure, want to delete all previous urls')
-        if (ans) {
-            let res = await fetch(`${api}/scrap/walmart/deleteoldurls`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ account: profile.account })
-            })
-            res = await res.json()
-            if (res.status) {
-                setCurrentstatus({ fetchedproduct: 0, fetchurl: 0 })
-            }
+        let res = await fetch(`${api}/scrap/macy/deleteoldurls`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ account: profile.account })
+        })
+        res = await res.json()
+        if (res.status) {
+            setCurrentstatus({ fetchedproduct: 0, fetchurl: 0 })
         }
     }
 
@@ -320,26 +317,26 @@ export default function Walmart() {
                 </div>
             )}
 
-            <Modal show={show} onHide={handleClose} >
-                <Modal.Header closeButton>
-                    <Modal.Title>Copy and Paste Source Code here</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <textarea name="htmlcode" id="htmlcode" cols={50} rows={10} placeholder='paste source code here' onChange={(e) => setHtml(e.target.value)} >
-
-                    </textarea>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Close
-                    </Button>
-                    <Button variant="primary" onClick={() => { handleClose(), fetchurl2() }}>
-                        Save Changes
-                    </Button>
-                </Modal.Footer>
-            </Modal>
-
             <div className="container ps-4 pe-4" style={{ opacity: loading ? 0.1 : 1, color: loading ? 'black' : null, zIndex: '10000', width: '100vw', minHeight: '100vh' }}>
+                <Modal show={show} onHide={handleClose} >
+                    <Modal.Header closeButton>
+                        <Modal.Title>Copy and Paste Source Code here</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <textarea name="htmlcode" id="htmlcode" cols={50} rows={10} placeholder='paste source code here' onChange={(e) => setHtml(e.target.value)} >
+
+                        </textarea>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose}>
+                            Close
+                        </Button>
+                        <Button variant="primary" onClick={() => { handleClose(), fetchurl() }}>
+                            Save Changes
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+
 
                 <div className="container-fluid pt-1 searchboxcontanier">
                     <div className="row ps-4 pe-4">
@@ -384,95 +381,83 @@ export default function Walmart() {
                     </div>
                 </div>
                 <div className="d-flex justify-content-center align-items-center">
-                    <h4 className='text-center ps-4 pe-4 pb-2 pt-2 headingtxt'>Walmart Product Scrapping</h4>
+                    <h4 className='text-center ps-4 pe-4 pb-2 pt-2 headingtxt'>Macy Product Scrapping</h4>
 
                 </div>
                 <div className="p-4 pt-1">
-
-                    {/* <div className='d-flex flex-column justify-content-center align-items-center w-100'>
-
-                        <div className='w-100 d-flex justify-content-center'>
-                            <input type="text" onChange={(e) => setUrl(e.target.value)} placeholder='Brand URL' className='w-25 p-2' />
-                            <input type="number" className='ms-3 p-2' onChange={(e) => setNum(e.target.value)} placeholder='Number of Pages' />
-                            <input type="text" className='ms-3 p-2' onChange={(e) => setBrand(e.target.value)} placeholder='Brand Name' />
-                            <button className='ms-4 p-3 ps-4 pe-4 themebtn' onClick={fetchbrand} >Fetch product URLs</button>
-                        </div>
-                    </div> */}
-
-                    {/* -------html */}
                     <h3 >Get Product Url</h3>
                     <div className="container-fluid mb-4">
                         <div className="row border border-secondary p-3">
-                            <div className="col-md-7 col-sm-12" style={{ borderRight: '1px solid gray' }}>
+                            <div className="col-md-9 col-sm-12" style={{ borderRight: '1px solid gray' }}>
                                 <h5 className='text-center'>By Brand URL</h5>
                                 <div className='w-100 d-flex justify-content-center'>
-                                    <input type="text" onChange={(e) => setUrl(e.target.value)} placeholder='Brand URL' className='p-2' />
+                                    <input type="text" onChange={(e) => setUrl(e.target.value)} placeholder='Brand URL' className='w-25 p-2' />
                                     <input type="number" className='ms-3 p-2' onChange={(e) => setNum(e.target.value)} placeholder='Number of pages' />
-                                    <button className='ms-4 p-3 ps-4 pe-4 themebtn' onClick={fetchbrand} disabled={isbusy}>Fetch urls</button>
+                                    <input type="text" className='ms-3 p-2' onChange={(e) => setBrand(e.target.value)} placeholder='Brand Name' />
+
+                                    <button className='ms-4 p-3 ps-4 pe-4 themebtn' onClick={fetchbrand} disabled={isbusy}>Fetch URLs</button>
                                 </div>
                             </div>
-                            <div className="col-md-1 col-sm-12" style={{ borderRight: '1px solid gray', display: 'grid', placeItems: 'center' }}>
-                                <h1>OR</h1>
-                            </div>
-                            <div className="col-md-4 col-sm-12">
-                                <h5 className='text-center'>By HTML ( Recommended )</h5>
+                            <div className="col-md-3 col-sm-12">
+                                <h5 className='text-center'>By HTML</h5>
                                 <div className="d-flex justify-content-center align-items-center">
+                                    <button className="themebtn" onClick={deleteoldurls}>Clear Previous Data</button>
                                     <button className="themebtn" onClick={handleShow}>Add html</button>
-                                    <button className="themebtn " style={{backgroundColor:'red'}} onClick={deleteoldurls}>Clear old Data</button>
-
                                 </div>
                             </div>
                         </div>
                     </div>
-                    {scrappingbrand && <h1 className='text-center'>Scrapping Brand - {scrappingbrand}</h1>}
-                    {currentstatus &&
-                        <div className="container w-100 d-flex justify-content-center align-items-center">
-                            <button className='m-2' onClick={() => handleshow('url')}> <a href="#urllist" className=''>Total product url - {currentstatus.producturl}</a> </button>
-                            <button className='m-2' onClick={()=>getupdatedproduct(profile.account)}> <div className="timer" >
-                                Total fetched Product : {currentstatus?.fetchedproduct} <span ><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="ms-4 bi bi-arrow-clockwise" viewBox="0 0 16 16">
-                                    <path fillRule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z" />
-                                    <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466" />
-                                </svg></span>
-                            </div></button>
 
-                            {Array.isArray(link) && link.length > 0 &&
-                                <>
-                                    <Dropdown>
-                                        <Dropdown.Toggle variant="" className='text-white border m-0 p-2' id="dropdown-basic">
-                                            Select Speed
-                                        </Dropdown.Toggle>
 
-                                        <Dropdown.Menu>
+                    {/* {currentstatus && */}
+                    <div className="container w-100 d-flex justify-content-center align-items-center">
+                        <button className='m-2' onClick={() => handleshow('url')}> <a href="#urllist" className='text-dark'>Total product url - {currentstatus?.producturl}</a> </button>
+                        {Array.isArray(remainingpage) && remainingpage.length > 0 && <button className='m-2' onClick={() => handleshow('url')}> <a href="#urllist" className='text-dark'>Remaining Page - {Array.isArray(remainingpage) && remainingpage.length}</a> </button>}
+                        <button className='m-2' onClick={getupdatedproduct}> <div className="timer" >
+                            Total fetched Product : {currentstatus?.fetchedproduct} <span ><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="ms-4 bi bi-arrow-clockwise" viewBox="0 0 16 16">
+                                <path fillRule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z" />
+                                <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466" />
+                            </svg></span>
+                        </div></button>
 
-                                            <Dropdown.Item onClick={() => setThread(6)}>6</Dropdown.Item>
-                                            <Dropdown.Item onClick={() => setThread(7)}>7</Dropdown.Item>
-                                            <Dropdown.Item onClick={() => setThread(8)}>8</Dropdown.Item>
-                                            <Dropdown.Item onClick={() => setThread(9)}>9</Dropdown.Item>
-                                            <Dropdown.Item onClick={() => setThread(10)}>10</Dropdown.Item>
-                                            <Dropdown.Item onClick={() => setThread(11)}>11</Dropdown.Item>
-                                            <Dropdown.Item onClick={() => setThread(12)}>12</Dropdown.Item>
-                                            <Dropdown.Item onClick={() => setThread(13)}>13</Dropdown.Item>
-                                            <Dropdown.Item onClick={() => setThread(14)}>14</Dropdown.Item>
-                                            <Dropdown.Item onClick={() => setThread(15)}>15</Dropdown.Item>
-                                            <Dropdown.Item onClick={() => setThread(16)}>16</Dropdown.Item>
-                                            <Dropdown.Item onClick={() => setThread(17)}>17</Dropdown.Item>
-                                            <Dropdown.Item onClick={() => setThread(18)}>18</Dropdown.Item>
+                        {link.length > 0 &&
+                            <>
+                                <Dropdown>
+                                    <Dropdown.Toggle variant="" className='text-white border m-0 p-2' id="dropdown-basic">
+                                        Select Speed
+                                    </Dropdown.Toggle>
 
-                                        </Dropdown.Menu>
-                                    </Dropdown>
-                                    <button className='m-2' onClick={scrapproduct} disabled={isbusy}>Start Scraping UPCs</button>
+                                    <Dropdown.Menu>
 
-                                </>
-                            }
-                            {currentstatus?.fetchedproduct > 0 &&
-                                <>
-                                    <button className='ms-4 mt-4 mb-3' variant="secondary" onClick={downloadProductExcel}>
-                                        Download Products List
-                                    </button>
-                                    <input type="file" onChange={(e) => handleFileChange(e.target.files[0])} accept=".xlsx, .xls, .xlsm" />                                </>
-                            }
-                        </div>
-                    }
+                                        <Dropdown.Item onClick={() => setThread(6)}>6</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => setThread(7)}>7</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => setThread(8)}>8</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => setThread(9)}>9</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => setThread(10)}>10</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => setThread(11)}>11</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => setThread(12)}>12</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => setThread(13)}>13</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => setThread(14)}>14</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => setThread(15)}>15</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => setThread(16)}>16</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => setThread(17)}>17</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => setThread(18)}>18</Dropdown.Item>
+
+                                    </Dropdown.Menu>
+                                </Dropdown>
+                                <button className='m-2' onClick={scrapproduct} disabled={isbusy}>Start Scraping UPCs</button>
+
+                            </>
+                        }
+                        {/* {currentstatus?.fetchedproduct > 0 && */}
+                        <>
+                            <button className='ms-4 mt-4 mb-3' variant="secondary" onClick={downloadProductExcel}>
+                                Download Products List
+                            </button>
+                            <input type="file" onChange={(e) => handleFileChange(e.target.files[0])} accept=".xlsx, .xls, .xlsm" />                                </>
+                        {/* } */}
+                    </div>
+                    {/* } */}
 
                     {showthread &&
                         <div id="profile" className='mt-4'>
@@ -482,7 +467,7 @@ export default function Walmart() {
                                 </svg>
                             </button>
                             <Suspense fallback={<div>Loading...</div>}>
-                                <Threads key={thread} state={{ urls: link, thread: thread, account: profile.account }} />
+                                <Threads state={{ urls: link, thread: thread, account: profile.account }} />
                             </Suspense>
                         </div>
                     }
@@ -500,8 +485,6 @@ export default function Walmart() {
                         </div>
 
                     }
-
-
                     <br />
                     {currentstatus?.fetchedproduct > 0 && <h5 className='text-center mt-3'> <Link to='/ecom/check-product'>Check Final Data</Link></h5>}
                     <hr />

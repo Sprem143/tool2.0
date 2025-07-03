@@ -7,7 +7,7 @@ import '../../App.scss'
 
 export default function Urllist({ state }) {
 
-    const local = 'http://localhost:10000'
+    const local = 'http://localhost:9000'
     const api = 'https://brand-b-1.onrender.com'
     const [loading, setLoading] = useState(false);
     const [msg, setMsg] = useState('Please Wait');
@@ -137,7 +137,7 @@ export default function Urllist({ state }) {
                                         >
                                             <td>{i + 1}</td>
 
-                                            <td className="align-content-center"><a href={d} >{d} </a> </td>
+                                            <td className="align-content-center"><a href={d} target="_blank" >{d} </a> </td>
                                             <td style={{ maxWidth: '100px' }}>
                                                 <button className="nobtn" onClick={() => deleteurl(d)}>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="red" className="bi bi-trash3-fill" viewBox="0 0 16 16">
