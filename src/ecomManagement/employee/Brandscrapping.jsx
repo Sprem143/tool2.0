@@ -287,11 +287,13 @@ export default function Brandscrapping() {
     };
 
     const fetchurl = async () => {
+        setLoading(true)
         let res = await fetch(`${api}/scrap/belk/fetchurl`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ html: html, profile: profile })
         })
+                setLoading(false)
         res = await res.json();
         if (res.status == 'exist') {
             alert(`This brand is already scrapped by ${res.data.name} on data - ${res.data.Date}`)
@@ -428,7 +430,7 @@ export default function Brandscrapping() {
 
                     {/* {currentstatus && */}
                     <div className="container w-100 d-flex justify-content-center align-items-center">
-                        <button className='m-2' onClick={() => handleshow('url')}> <a href="#urllist" className='text-dark'>Total product url - {currentstatus?.producturl}</a> </button>
+                        <button className='m-2' onClick={() => handleshow('url')}> <a href="#urllist" className='text-white'>Total product url - {currentstatus?.producturl}</a> </button>
                         <button className='m-2' onClick={getupdatedproduct}> <div className="timer" >
                             Total fetched Product : {currentstatus?.fetchedproduct} <span ><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="ms-4 bi bi-arrow-clockwise" viewBox="0 0 16 16">
                                 <path fillRule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z" />
